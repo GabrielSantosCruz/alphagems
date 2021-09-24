@@ -1,4 +1,4 @@
-def Build_Matriz(n, o): #gera uma matriz já preenchida com letras aleatórias
+def build_matriz(n, o): #gera uma matriz já preenchida com letras aleatórias
     # n é o tamanho da matriz
     # o é a quantidade de "colors"
     import string
@@ -27,7 +27,7 @@ def check_number_matriz(number): # verificar se o número digitado é inteiro
     return int(number) # retorna o número já convertido
 
 def check_int(number):
-    while not number.isdigit() or len(number) == 0 or int(number) <= 0:
+    while not number.isdigit() or len(number) == 0 or int(number) < 0:
         number = input("Erro! Digite um valor válido: ")
     return int(number) # retorna o número já convertido
     
