@@ -1,39 +1,39 @@
-def gerar_matriz(n, o): #gera uma matriz já preenchida com letras aleatórias
+def Build_Matriz(n, o): #gera uma matriz já preenchida com letras aleatórias
     # n é o tamanho da matriz
-    # o é a quantidade de "cores"
+    # o é a quantidade de "colors"
     import string
     from random import choice
-    cores = ['A','B','C','D','E','F','G','H','I','J']
+    colors = ['A','B','C','D','E','F','G','H','I','J']
 
-    cores = cores[0:o] # lista com as cores
+    colors = colors[0:o] # lista com as cores
 
-    linha = [0] * n # cria a quantidade de colunas
-    matriz = [linha] * n # cria a quantidade de linhas
+    line = [0] * n # cria a quantidade de colunas
+    matriz = [line] * n # cria a quantidade de linhas
 
     for l in range(n):
-        linha = []
+        line = []
         for c in range(n):
-            x = choice(cores) # criar as letras aleatórias a partir de uma lista
-            linha.append(x)
-        matriz[l] = linha
+            x = choice(colors) # criar as letras aleatórias a partir de uma lista
+            line.append(x)
+        matriz[l] = line
 
     for i in range(n): # printa a matriz linha por linha
         print(matriz[i])
     return matriz
 
-def verificacao_int_matriz(num): # verificar se o número digitado é inteiro
-    while not num.isdigit() or len(num) == 0 or int(num) > 10 or int(num) < 3:
-        num = input("Erro! Digite um valor válido: ")
-    return int(num) # retorna o número já convertido
+def check_number_matriz(number): # verificar se o número digitado é inteiro
+    while not number.isdigit() or len(number) == 0 or int(number) > 10 or int(number) < 3:
+        number = input("Erro! Digite um valor válido: ")
+    return int(number) # retorna o número já convertido
 
-def verificar_int(num):
-    while not num.isdigit() or len(num) == 0 or int(num) <= 0:
-        num = input("Erro! Digite um valor válido: ")
-    return int(num) # retorna o número já convertido
+def check_int(number):
+    while not number.isdigit() or len(number) == 0 or int(number) <= 0:
+        number = input("Erro! Digite um valor válido: ")
+    return int(number) # retorna o número já convertido
     
-def quantidade_cores(num): # cria uma lista com letras
+def amount_colors(number): # cria uma lista com letras
     letras = ['A','B','C','D','E','F','G','H','I','J']
-    cores = []
-    for i in range(num):
-        cores.append(letras[i])
-    print(cores)
+    colors = []
+    for i in range(number):
+        colors.append(letras[i])
+    print(colors)
