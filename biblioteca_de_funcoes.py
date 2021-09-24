@@ -36,4 +36,9 @@ def amount_colors(number): # cria uma lista com letras
     colors = []
     for i in range(number):
         colors.append(letras[i])
+    return colors
     print(colors)
+
+def print_matriz(matriz): # printa matruz recebida como parâmetro
+    for i in range(len(matriz)): # printa a matriz linha por linha
+        print(matriz[i])
