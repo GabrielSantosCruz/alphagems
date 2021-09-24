@@ -42,3 +42,5 @@ def amount_colors(number): # cria uma lista com letras
 def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
+
+#def validate_moviment():
