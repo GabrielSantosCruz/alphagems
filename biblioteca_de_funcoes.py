@@ -43,4 +43,18 @@ def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
 
+def break_gens_horizon(p, m):
+    for i in range(m+1):
+            quant = 1
+            for j in range(m+1):
+                
+                if p[i][j] == p[i][j-1]: # lê-se se a posição atual for igual a posição da frente
+                    # também ocorre de trocar o loop e n cair no else
+                    quant += 1 # não entendo pq ta adicionando +1
+                else:
+                    #quant = quant
+                    if quant >= 3:
+                        p[i][j-3] = p[i][j-2] = p[i][j-1] = ' '
+                        quant = 1
+    return p
 #def validate_moviment():
