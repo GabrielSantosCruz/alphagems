@@ -10,9 +10,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins 
 O código e sua evolução pode ser encontrado em: https://github.com/GabrielSantosCruz/alphagens
 ******************************************************************************************/'''
 from biblioteca_de_funcoes import *
-
 print('''
-
 ░█████╗░██╗░░░░░██████╗░██╗░░██╗░█████╗░░██████╗░███████╗███╗░░██╗░██████╗
 ██╔══██╗██║░░░░░██╔══██╗██║░░██║██╔══██╗██╔════╝░██╔════╝████╗░██║██╔════╝
 ███████║██║░░░░░██████╔╝███████║███████║██║░░██╗░█████╗░░██╔██╗██║╚█████╗░
@@ -33,16 +31,10 @@ n = check_number_matriz(input('Digite a quantidade de cores: '))
 p = build_matriz(m, n)
 
 while True:
-    for i in range(m):
-        quant = 1
-        for j in range(m-1):
-            if p[i][j] == p[i][j+1]:
-                quant += 1
-            if quant == 3:
-                p[i][j-3] = p[i][j-2] = p[i][j-1] = 0
-    print('='*50)
     print_matriz(p)
-
+    print('='*50)
+    break_gens(p, m)
+    print_matriz(p)
     atual_m = check_int(input("Digite a linha atual: "))
     atual_n = check_int(input("Digite a coluna atual: "))
     final_m = check_int(input("Digite a linha final: "))
@@ -56,14 +48,6 @@ while True:
     print('='*50)
     print_matriz(p)
     print("Apos juntar 3: ")
-    '''if p[0][0] == p[0][1] == p[0][2]:
-        p[0][0] = p[0][1] = p[0][2] = 0'''
+    break_gens(p, m)
         
     print_matriz(p)
-    #verificar se foi ponto
-
-    '''colors = ['A','B','C','D','E','F','G','H','I','J']
-    for i in range(m):
-        for j in range(m):
-            if p[i][j] == 0:
-                p[i][j] = choice(colors)'''
