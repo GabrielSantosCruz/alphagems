@@ -18,3 +18,12 @@
 ### Dicas
 
 "Durante o jogo, `é possível obter dicas`, que são fornecidas `na forma da posição` de uma gema cuja `permutação` com outra gema é válida. Cada dica obtida `gera o desconto de 1 gema` do total de pontos (dados pelo total de gemas destruídas)."
+
+## Requisitos
+
+| Nº | Requisito | 
+| :---------: | :------------: |
+| 01 | Permitir que o usuário efetue a permutação de posições.; |
+| 02 | Verificar sequencia/cadeias de gemas, remover e aumentar a pontuação do jogador; |
+| 03 | Gerar uma matriz onde a quantidade de linhas e de colunas são definidas pelo usuário; |
+| 04 | Sempre verificar se há combinações possíveis na matriz, caso não, encerrar o jogo; |
