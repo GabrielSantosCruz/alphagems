@@ -55,6 +55,7 @@ def amount_colors(number): # cria uma lista com letras
         colors.append(letras[i])
     return colors
     print(colors)
+    return colors
 
 def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
@@ -67,18 +68,16 @@ def permutation(matriz): # realiza a permutação dos itens da matriz
     finale_n = check_int(input("Digite a coluna final: "))
     x = matriz[current_m][current_n]
     y = matriz[finale_m][finale_n]
-    matriz[atual_m][atual_n] = y
+    matriz[current_m][current_n] = y
     matriz[finale_m][finale_n] = x
     return matriz
-#def validate_moviment():
 
 def break_gens(matriz, tamanho):
-    for i in range(tamanho+1):
+    for i in range(tamanho):
             quant = 1
-            for j in range(tamanho+1):
-  
+            for j in range(tamanho):
                 if j > 0:
-                    if matriz[i][j] == matriz[i][j-1]:
+                    if matriz[i][j] == matriz[i][j-1]: # erro de Index saindo do range
                         quant +=1
                     else:
                         if quant >= 3:
@@ -86,3 +85,5 @@ def break_gens(matriz, tamanho):
                                 matriz[i][j-k] = ' '
                             quant = 1
     return matriz
+
+#def validate_moviment():
