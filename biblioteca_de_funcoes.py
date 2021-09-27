@@ -59,13 +59,13 @@ def break_gens(matriz, tamanho):
                         quant = 1
     return matriz
 
-def permutation(matriz):
-    atual_m = check_int(input("Digite a linha atual: "))
-    atual_n = check_int(input("Digite a coluna atual: "))
-    final_m = check_int(input("Digite a linha final: "))
-    final_n = check_int(input("Digite a coluna final: "))
-    x = matriz[atual_m][atual_n]
-    y = matriz[final_m][final_n]
+def permutation(matriz): # realiza a permutação dos itens da matriz
+    current_m = check_int(input("Digite a linha atual: "))
+    current_n = check_int(input("Digite a coluna atual: "))
+    finale_m = check_int(input("Digite a linha final: "))
+    finale_n = check_int(input("Digite a coluna final: "))
+    x = matriz[current_m][current_n]
+    y = matriz[finale_m][finale_n]
     matriz[atual_m][atual_n] = y
     matriz[final_m][final_n] = x
     return matriz
