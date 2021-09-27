@@ -15,26 +15,26 @@ def menu():
     @     -    *   %  |--------------------------|   %     -    @      #    
 ''')
 
-def build_matriz(n, o): #gera uma matriz já preenchida com letras aleatórias
+def build_matriz(size, quant_colors): #gera uma matriz já preenchida com letras aleatórias
     # n é o tamanho da matriz
     # o é a quantidade de "colors"
     import string
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
 
-    colors = colors[0:o] # lista com as cores
+    colors = colors[0:quant_colors] # lista com as cores
 
-    line = [0] * n # cria a quantidade de colunas
-    matriz = [line] * n # cria a quantidade de linhas
+    line = [0] * size # cria a quantidade de colunas
+    matriz = [line] * size # cria a quantidade de linhas
 
-    for l in range(n):
+    for l in range(size):
         line = []
-        for c in range(n):
+        for c in range(size):
             x = choice(colors) # criar as letras aleatórias a partir de uma lista
             line.append(x)
         matriz[l] = line
 
-    for i in range(n): # printa a matriz linha por linha
+    for i in range(size): # printa a matriz linha por linha
         print(matriz[i])
     return matriz
 
@@ -68,7 +68,7 @@ def permutation(matriz): # realiza a permutação dos itens da matriz
     x = matriz[current_m][current_n]
     y = matriz[finale_m][finale_n]
     matriz[atual_m][atual_n] = y
-    matriz[final_m][final_n] = x
+    matriz[finale_m][finale_n] = x
     return matriz
 #def validate_moviment():
 
