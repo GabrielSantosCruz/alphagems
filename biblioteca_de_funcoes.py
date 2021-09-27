@@ -43,18 +43,26 @@ def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
 
-def break_gens_horizon(p, m):
-    for i in range(m+1):
+def break_gens(matriz, tamanho):
+    for i in range(tamanho+1):
             quant = 1
-            for j in range(m+1):
+            for j in range(tamanho+1):
                 
-                if p[i][j] == p[i][j-1]: # lê-se se a posição atual for igual a posição da frente
+                if matriz[i][j] == matriz[i][j-1]: # lê-se se a matrizosição atual for igual a matrizosição da frente
                     # também ocorre de trocar o loop e n cair no else
                     quant += 1 # não entendo pq ta adicionando +1
+
                 else:
-                    #quant = quant
                     if quant >= 3:
-                        p[i][j-3] = p[i][j-2] = p[i][j-1] = ' '
+                        for k in range(1, quant+1):                            
+                            matriz[i][j-k] = ' '
                         quant = 1
-    return p
+    return matriz
+
+def permutation(atual_m, atual_n, final_m, final_n, matriz):
+    x = matriz[atual_m][atual_n]
+    y = matriz[final_m][final_n]
+    matriz[atual_m][atual_n] = y
+    matriz[final_m][final_n] = x
+    return matriz
 #def validate_moviment():
