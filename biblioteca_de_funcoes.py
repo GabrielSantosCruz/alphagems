@@ -1,3 +1,20 @@
+def menu():
+    print('''
+░█████╗░██╗░░░░░██████╗░██╗░░██╗░█████╗░░██████╗░███████╗███╗░░██╗░██████╗
+██╔══██╗██║░░░░░██╔══██╗██║░░██║██╔══██╗██╔════╝░██╔════╝████╗░██║██╔════╝
+███████║██║░░░░░██████╔╝███████║███████║██║░░██╗░█████╗░░██╔██╗██║╚█████╗░
+██╔══██║██║░░░░░██╔═══╝░██╔══██║██╔══██║██║░░╚██╗██╔══╝░░██║╚████║░╚═══██╗
+██║░░██║███████╗██║░░░░░██║░░██║██║░░██║╚██████╔╝███████╗██║░╚███║██████╔╝
+╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░
+==========================================================================
+  #     ==     *    -      @       __    #       **     -_     %     $   %      
+      *     -    *    |--------------------------|  #  -    *   --      @ 
+   *        #         |     1 - Jogar            |      *       -    #   
+      @       *       |     2 - Tutorial         | @     -   #      ==   *
+          #       *   |     3 - Sair             |     #   -  *    %    -
+    @     -    *   %  |--------------------------|   %     -    @      #    
+''')
+
 def build_matriz(n, o): #gera uma matriz já preenchida com letras aleatórias
     # n é o tamanho da matriz
     # o é a quantidade de "colors"
@@ -43,22 +60,6 @@ def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
 
-def break_gens(matriz, tamanho):
-    for i in range(tamanho+1):
-            quant = 1
-            for j in range(tamanho+1):
-                
-                if matriz[i][j] == matriz[i][j-1]: # lê-se se a matrizosição atual for igual a matrizosição da frente
-                    # também ocorre de trocar o loop e n cair no else
-                    quant += 1 # não entendo pq ta adicionando +1
-
-                else:
-                    if quant >= 3:
-                        for k in range(1, quant+1):                            
-                            matriz[i][j-k] = ' '
-                        quant = 1
-    return matriz
-
 def permutation(matriz): # realiza a permutação dos itens da matriz
     current_m = check_int(input("Digite a linha atual: "))
     current_n = check_int(input("Digite a coluna atual: "))
@@ -71,19 +72,17 @@ def permutation(matriz): # realiza a permutação dos itens da matriz
     return matriz
 #def validate_moviment():
 
-def menu():
-    print('''
-░█████╗░██╗░░░░░██████╗░██╗░░██╗░█████╗░░██████╗░███████╗███╗░░██╗░██████╗
-██╔══██╗██║░░░░░██╔══██╗██║░░██║██╔══██╗██╔════╝░██╔════╝████╗░██║██╔════╝
-███████║██║░░░░░██████╔╝███████║███████║██║░░██╗░█████╗░░██╔██╗██║╚█████╗░
-██╔══██║██║░░░░░██╔═══╝░██╔══██║██╔══██║██║░░╚██╗██╔══╝░░██║╚████║░╚═══██╗
-██║░░██║███████╗██║░░░░░██║░░██║██║░░██║╚██████╔╝███████╗██║░╚███║██████╔╝
-╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░
-==========================================================================
-  #     ==     *    -      @       __    #       **     -_     %     $   %      
-      *     -    *    |--------------------------|  #  -    *   --      @ 
-   *        #         |     1 - Jogar            |      *       -    #   
-      @       *       |     2 - Tutorial         | @     -   #      ==   *
-          #       *   |     3 - Sair             |     #   -  *    %    -
-    @     -    *   %  |--------------------------|   %     -    @      #    
-''')
+def break_gens(matriz, tamanho):
+    for i in range(tamanho+1):
+            quant = 1
+            for j in range(tamanho+1):
+  
+                if j > 0:
+                    if matriz[i][j] == matriz[i][j-1]:
+                        quant +=1
+                    else:
+                        if quant >= 3:
+                            for k in range(1, quant+1):                            
+                                matriz[i][j-k] = ' '
+                            quant = 1
+    return matriz
