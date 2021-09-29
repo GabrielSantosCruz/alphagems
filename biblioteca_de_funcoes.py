@@ -96,9 +96,15 @@ def break_gens_colune(matriz, tamanho):
     for i in range(tamanho):
             quant = 1
             for j in range(tamanho):
-                if j > 0: # qunado o j zera o contador reseta sem estourar as gemas da borda
-                    if matriz[j][i] == matriz[j-1][i]: # erro de Index saindo do range
+
+                if j > 0: 
+                    if matriz[j][i] == matriz[j-1][i]:
                         quant +=1
+                        if quant >= 3 and (j == (tamanho-1)): # para quando houver de quebrar gemas nas bordas
+                            for k in range(1, quant+1):                      
+                                matriz[(j+1)-k][i] = ' '
+                            quant = 1
+                   
                     else:
                         if quant >= 3:
                             for k in range(1, quant+1):                         
@@ -107,4 +113,3 @@ def break_gens_colune(matriz, tamanho):
                         else:
                             quant = 1
     return matriz
-#def validate_moviment():
