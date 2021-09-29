@@ -72,7 +72,7 @@ def permutation(matriz): # realiza a permutação dos itens da matriz
     matriz[finale_m][finale_n] = x
     return matriz
 
-def break_gens(matriz, tamanho):
+def break_gens_line(matriz, tamanho): # quando está no final da matriz não quebra ;-;
     for i in range(tamanho):
             quant = 1
             for j in range(tamanho):
@@ -83,6 +83,8 @@ def break_gens(matriz, tamanho):
                         if quant >= 3:
                             for k in range(1, quant+1):                            
                                 matriz[i][j-k] = ' '
+                            quant = 1
+                        else:
                             quant = 1
     return matriz
 
