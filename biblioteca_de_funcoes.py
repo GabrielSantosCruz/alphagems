@@ -60,6 +60,7 @@ def amount_colors(number): # cria uma lista com letras
 def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
+        
 def permutation(matriz): # realiza a permutação dos itens da matriz
     current_m = check_int(input("Digite a linha atual: "))
     current_n = check_int(input("Digite a coluna atual: "))

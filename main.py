@@ -1,4 +1,4 @@
-'''*******************************************************************************
+'''/*******************************************************************************
 Autor: Gabriel Santos Cruz
 Componente Curricular: Algoritmos I
 Concluido em: xx/xx/2021
@@ -9,6 +9,7 @@ de outra autoria que não a minha está destacado com uma citação para o autor
 do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
 O código e sua evolução pode ser encontrado em: https://github.com/GabrielSantosCruz/alphagens
 ******************************************************************************************/'''
+from os import *
 from biblioteca_de_funcoes import *
 menu()
 
@@ -18,8 +19,9 @@ p = build_matriz(m, n)
 
 while True:
     print('='*50)
+    p = break_gens_line(p, m)
+    p = break_gens_colune(p, m)
+    print_matriz(p)
     p = permutation(p)
-    print('='*50)
-    print_matriz(p)
-    print("Apos juntar 3: ")
-    print_matriz(p)
+
+    system("cls") # limpar a tela do terminal a cada loop para não poluí-la
