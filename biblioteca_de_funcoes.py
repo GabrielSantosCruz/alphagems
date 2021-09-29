@@ -60,12 +60,16 @@ def amount_colors(number): # cria uma lista com letras
 def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
-
 def permutation(matriz): # realiza a permutação dos itens da matriz
     current_m = check_int(input("Digite a linha atual: "))
     current_n = check_int(input("Digite a coluna atual: "))
     finale_m = check_int(input("Digite a linha final: "))
     finale_n = check_int(input("Digite a coluna final: "))
+    while ((finale_m - current_m != 0) and (finale_n - current_n != 0)) or ((abs(finale_m - current_n) != 1) and (abs(finale_n - current_m) != 1)):
+        print("Erro! Permutação inválida!")
+        finale_m = check_int(input("Digite a linha final: "))
+        finale_n = check_int(input("Digite a coluna final: "))
+
     x = matriz[current_m][current_n]
     y = matriz[finale_m][finale_n]
     matriz[current_m][current_n] = y
@@ -88,4 +92,19 @@ def break_gens_line(matriz, tamanho): # quando está no final da matriz não que
                             quant = 1
     return matriz
 
+def break_gens_colune(matriz, tamanho):
+    for i in range(tamanho):
+            quant = 1
+            for j in range(tamanho):
+                if j > 0: # qunado o j zera o contador reseta sem estourar as gemas da borda
+                    if matriz[j][i] == matriz[j-1][i]: # erro de Index saindo do range
+                        quant +=1
+                    else:
+                        if quant >= 3:
+                            for k in range(1, quant+1):                         
+                                matriz[j-k][i] = ' '
+                            quant = 1
+                        else:
+                            quant = 1
+    return matriz
 #def validate_moviment():
