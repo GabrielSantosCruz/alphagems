@@ -83,6 +83,10 @@ def break_gens_line(matriz, tamanho): # quando está no final da matriz não que
                 if j > 0:
                     if matriz[i][j] == matriz[i][j-1]: # erro de Index saindo do range
                         quant +=1
+                        if quant >= 3 and (j == (tamanho-1)): # para quando houver de quebrar gemas nas bordas
+                            for k in range(1, quant+1):                      
+                                matriz[i][(j+1)-k] = ' '
+                            quant = 1                    
                     else:
                         if quant >= 3:
                             for k in range(1, quant+1):                            
