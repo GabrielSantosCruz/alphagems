@@ -66,7 +66,7 @@ def permutation(matriz): # realiza a permutação dos itens da matriz
     current_n = check_int(input("Digite a coluna atual: "))
     finale_m = check_int(input("Digite a linha final: "))
     finale_n = check_int(input("Digite a coluna final: "))
-    while ((finale_m - current_m != 0) and (finale_n - current_n != 0)) or ((abs(finale_m - current_n) != 1) and (abs(finale_n - current_m) != 1)):
+    while ((finale_m - current_m != 0) and (finale_n - current_n != 0)) or ((abs(current_m - finale_m) != 1 and current_m != current_n) or (abs(current_n - finale_n != 1) and current_n != finale_n)):
         print("Erro! Permutação inválida!")
         finale_m = check_int(input("Digite a linha final: "))
         finale_n = check_int(input("Digite a coluna final: "))
