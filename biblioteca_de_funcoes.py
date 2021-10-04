@@ -16,8 +16,7 @@ def menu():
 ''')
 
 def build_matriz(size, quant_colors): #gera uma matriz já preenchida com letras aleatórias
-    # n é o tamanho da matriz
-    # o é a quantidade de "colors"
+
     import string
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
@@ -30,7 +29,7 @@ def build_matriz(size, quant_colors): #gera uma matriz já preenchida com letras
     for l in range(size):
         line = []
         for c in range(size):
-            x = choice(colors) # criar as letras aleatórias a partir de uma lista
+            x = choice(colors) # sorteia as letras a partir de uma lista
             line.append(x)
         matriz[l] = line
 
@@ -61,15 +60,12 @@ def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
         
-def permutation(matriz): # realiza a permutação dos itens da matriz
-    current_m = check_int(input("Digite a linha atual: "))
-    current_n = check_int(input("Digite a coluna atual: "))
-    finale_m = check_int(input("Digite a linha final: "))
-    finale_n = check_int(input("Digite a coluna final: "))
-    while ((finale_m - current_m != 0) and (finale_n - current_n != 0)) or ((abs(current_m - finale_m) != 1 and current_m != current_n) or (abs(current_n - finale_n != 1) and current_n != finale_n)):
+def permutation(current_m, current_n, finale_m, finale_n, matriz): # realiza a permutação dos itens da matriz
+    '''while ((finale_m - current_m != 0) and (finale_n - current_n != 0)) or ((abs(current_m - finale_m) != 1) and (current_m != current_n)) or ((abs(current_n - finale_n != 1) and (current_n != finale_n))):
         print("Erro! Permutação inválida!")
         finale_m = check_int(input("Digite a linha final: "))
-        finale_n = check_int(input("Digite a coluna final: "))
+        finale_n = check_int(input("Digite a coluna final: "))''' # como essa parte da verificação ainda está dando erro eu não ativei
+        # Quando a linha incial e final são iguais da erro
 
     x = matriz[current_m][current_n]
     y = matriz[finale_m][finale_n]
@@ -77,12 +73,12 @@ def permutation(matriz): # realiza a permutação dos itens da matriz
     matriz[finale_m][finale_n] = x
     return matriz
 
-def break_gens_line(matriz, tamanho): # quando está no final da matriz não quebra ;-;
+def break_gens_line(matriz, tamanho):
     for i in range(tamanho):
             quant = 1
             for j in range(tamanho):
-                if j > 0:
-                    if matriz[i][j] == matriz[i][j-1]: # erro de Index saindo do range
+                if j > 0:   # para corrigir o erro de Index saindo do range
+                    if matriz[i][j] == matriz[i][j-1]: 
                         quant +=1
                         if quant >= 3 and (j == (tamanho-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
