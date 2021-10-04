@@ -16,12 +16,13 @@ menu()
 m = check_number_matriz(input('Digite o tamanho da matriz: '))
 n = check_number_matriz(input('Digite a quantidade de cores: '))
 p = build_matriz(m, n)
-
+point = 0
 while True:
     print('='*50)
     p = break_gens_line(p, m)
     p = break_gens_colune(p, m)
     print_matriz(p)
+    p = punctuation(p, m, point)
     current_m = check_int(input("Digite a linha atual: "))
     current_n = check_int(input("Digite a coluna atual: "))
     finale_m = check_int(input("Digite a linha final: "))

@@ -114,3 +114,12 @@ def break_gens_colune(matriz, tamanho):
                         else:
                             quant = 1
     return matriz
+
+def punctuation(matriz, tamanho, point):
+    for i in range(tamanho):            
+            for j in range(tamanho):
+                if matriz[i][j] == ' ':
+                    point += 1
+                    matriz[i][j] = '@'
+    print(point)
+    return matriz
