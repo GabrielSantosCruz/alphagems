@@ -14,14 +14,17 @@ from biblioteca_de_funcoes import *
 menu()
 
 m = check_number_matriz(input('Digite o tamanho da matriz: '))
-n = check_number_matriz(input('Digite a quantidade de cores: '))
-p = build_matriz(m, n)
+
+p = build_matriz(m)
 point = 0
 while True:
     print('='*50)
     p = break_gens_line(p, m)
     p = break_gens_colune(p, m)
-    p = fall(m, p)
+    p = fall(p, m)
+    print_matriz(p)
+    p = generate(p, m)
+    print('='*50)
     print_matriz(p)
     p = punctuation(p, m, point)
     current_m = check_int(input("Digite a linha atual: "))

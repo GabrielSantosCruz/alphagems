@@ -14,14 +14,13 @@ def menu():
           #       *   |     3 - Sair             |     #   -  *    %    -
     @     -    *   %  |--------------------------|   %     -    @      #    
 ''')
+colors = ['A','B','C','D','E','F','G','H','I','J']
+def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
 
-def build_matriz(size, quant_colors): #gera uma matriz já preenchida com letras aleatórias
-
-    import string
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
 
-    colors = colors[0:quant_colors] # lista com as cores
+    colors = colors[0:size] # lista com as cores
 
     line = [0] * size # cria a quantidade de colunas
     matriz = [line] * size # cria a quantidade de linhas
@@ -93,15 +92,15 @@ def break_gens_line(matriz, tamanho):
                             quant = 1
     return matriz
 
-def break_gens_colune(matriz, tamanho):
-    for i in range(tamanho):
+def break_gens_colune(matriz, size):
+    for i in range(size):
             quant = 1
-            for j in range(tamanho):
+            for j in range(size):
 
                 if j > 0: 
                     if matriz[j][i] == matriz[j-1][i]:
                         quant +=1
-                        if quant >= 3 and (j == (tamanho-1)): # para quando houver de quebrar gemas nas bordas
+                        if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
                                 matriz[(j+1)-k][i] = ' '
                             quant = 1
@@ -115,20 +114,31 @@ def break_gens_colune(matriz, tamanho):
                             quant = 1
     return matriz
 
-def punctuation(matriz, tamanho, point):
-    for i in range(tamanho):            
-            for j in range(tamanho):
+def punctuation(matriz, size, point):
+    for i in range(size):            
+            for j in range(size):
                 if matriz[i][j] == ' ':
                     point += 1
 
     print(f'Pontos: {point}')
     return matriz
 
-def fall(tamanho, matriz):
-    for i in range(tamanho):
-        for j in range(tamanho-1, 0, -1):
-            for k in range(tamanho-1, -1, -1):
+def fall(matriz, size):
+    for i in range(size):
+        for j in range(size-1, 0, -1):
+            for k in range(size-1, -1, -1):
                 if matriz[j][k] == ' ':
                     matriz[j][k], matriz[j-1][k] = matriz[j-1][k], matriz[j][k]
+    
+    return matriz
+
+def generate(matriz, size):
+    
+    from random import choice
+
+    for i in range(size):
+        if matriz[0][i] == ' ':
+            y = choice(colors[0:size])
+            matriz[0][i] = y
     
     return matriz
