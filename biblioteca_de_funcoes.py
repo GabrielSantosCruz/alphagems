@@ -120,6 +120,15 @@ def punctuation(matriz, tamanho, point):
             for j in range(tamanho):
                 if matriz[i][j] == ' ':
                     point += 1
-                    matriz[i][j] = '@'
-    print(point)
+
+    print(f'Pontos: {point}')
+    return matriz
+
+def fall(tamanho, matriz):
+    for i in range(tamanho):
+        for j in range(tamanho-1, 0, -1):
+            for k in range(tamanho-1, -1, -1):
+                if matriz[j][k] == ' ':
+                    matriz[j][k], matriz[j-1][k] = matriz[j-1][k], matriz[j][k]
+    
     return matriz

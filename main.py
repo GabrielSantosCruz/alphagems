@@ -21,6 +21,7 @@ while True:
     print('='*50)
     p = break_gens_line(p, m)
     p = break_gens_colune(p, m)
+    p = fall(m, p)
     print_matriz(p)
     p = punctuation(p, m, point)
     current_m = check_int(input("Digite a linha atual: "))
