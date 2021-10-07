@@ -14,7 +14,9 @@ def menu():
           #       *   |     3 - Sair             |     #   -  *    %    -
     @     -    *   %  |--------------------------|   %     -    @      #    
 ''')
+
 colors = ['A','B','C','D','E','F','G','H','I','J']
+
 def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
 
     from random import choice
@@ -32,8 +34,6 @@ def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
             line.append(x)
         matriz[l] = line
 
-    for i in range(size): # printa a matriz linha por linha
-        print(matriz[i])
     return matriz
 
 def check_number_matriz(number): # verificar se o número digitado é inteiro
@@ -66,20 +66,21 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz): # realiza a p
         finale_n = check_int(input("Digite a coluna final: "))''' # como essa parte da verificação ainda está dando erro eu não ativei
         # Quando a linha incial e final são iguais da erro
 
-    x = matriz[current_m][current_n]
-    y = matriz[finale_m][finale_n]
-    matriz[current_m][current_n] = y
-    matriz[finale_m][finale_n] = x
+    x = matriz[current_m-1][current_n-1]
+    y = matriz[finale_m-1][finale_n-1]
+    matriz[current_m-1][current_n-1] = y
+    matriz[finale_m-1][finale_n-1] = x
+    
     return matriz
 
-def break_gens_line(matriz, tamanho):
-    for i in range(tamanho):
+def break_gens_line(matriz, size): # quebra de gemas nas linhas
+    for i in range(size):
             quant = 1
-            for j in range(tamanho):
+            for j in range(size):
                 if j > 0:   # para corrigir o erro de Index saindo do range
                     if matriz[i][j] == matriz[i][j-1]: 
                         quant +=1
-                        if quant >= 3 and (j == (tamanho-1)): # para quando houver de quebrar gemas nas bordas
+                        if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
                                 matriz[i][(j+1)-k] = ' '
                             quant = 1                    
@@ -92,7 +93,7 @@ def break_gens_line(matriz, tamanho):
                             quant = 1
     return matriz
 
-def break_gens_colune(matriz, size):
+def break_gens_colune(matriz, size): # quebra de gemas na coluna
     for i in range(size):
             quant = 1
             for j in range(size):
@@ -114,26 +115,36 @@ def break_gens_colune(matriz, size):
                             quant = 1
     return matriz
 
-def punctuation(matriz, size, point):
+def punctuation(matriz, size, point): # calcula a pontuação do jogo
     for i in range(size):            
             for j in range(size):
                 if matriz[i][j] == ' ':
                     point += 1
 
     print(f'Pontos: {point}')
-    return matriz
+    # provavelmente quando a gravidade for adicionada corretamente deve ter que retornar "point"
 
-def fall(matriz, size):
-    for i in range(size):
+def gravity(matriz, size): # só faz uma verificação
+    from random import choice
+    condition = True
+    quant = 0
+    
+    for i in range(size): # faz as gemas cairem
         for j in range(size-1, 0, -1):
             for k in range(size-1, -1, -1):
                 if matriz[j][k] == ' ':
+                    #condition = True
                     matriz[j][k], matriz[j-1][k] = matriz[j-1][k], matriz[j][k]
     
+def validation_in_matriz(matriz, size):
+    for i in range(size): # para conferir se há mais permutações para fazer
+        for j in range(size):
+            if matriz[i][j] == ' ':
+                quant += 1
+
     return matriz
 
-def generate(matriz, size):
-    
+def generate_in_line(matriz, size):
     from random import choice
 
     for i in range(size):
@@ -141,4 +152,26 @@ def generate(matriz, size):
             y = choice(colors[0:size])
             matriz[0][i] = y
     
+    return matriz
+
+def verfication(matriz, size):
+    quant = 0
+    for i in range(size):
+        for j in range(size):
+            if matriz[i][j] == ' ':
+                quant += 1
+    if quant > 0:
+        return True
+    else:
+        return False
+
+def parar_de_cair(matriz, size, point):
+    a = True
+    while a:
+        matriz = break_gens_line(matriz, size)
+        matriz = break_gens_colune(matriz, size)
+        punctuation(matriz, size, point)
+        matriz = gravity(matriz, size)
+        matriz = generate_in_line(matriz, size)
+        a = verfication(matriz, size)
     return matriz

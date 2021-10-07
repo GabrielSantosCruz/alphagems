@@ -11,25 +11,34 @@ O código e sua evolução pode ser encontrado em: https://github.com/GabrielSan
 ******************************************************************************************/'''
 from os import system
 from biblioteca_de_funcoes import *
+
 menu()
 
 m = check_number_matriz(input('Digite o tamanho da matriz: '))
-
 p = build_matriz(m)
+
 point = 0
+
 while True:
-    print('='*50)
-    p = break_gens_line(p, m)
-    p = break_gens_colune(p, m)
-    p = fall(p, m)
     print_matriz(p)
-    p = generate(p, m)
     print('='*50)
+    system("cls")
+    a = True
+    while a:
+        matriz = break_gens_line(p, m)
+        matriz = break_gens_colune(p, m)
+        print_matriz(p)
+        print('='*50)        
+        punctuation(p, m, point)
+        matriz = gravity(p, m)
+        matriz = generate_in_line(p, m)
+        print_matriz(p)
+        print('='*50)
+        a = verfication(p, m)
+
     print_matriz(p)
-    p = punctuation(p, m, point)
     current_m = check_int(input("Digite a linha atual: "))
     current_n = check_int(input("Digite a coluna atual: "))
     finale_m = check_int(input("Digite a linha final: "))
     finale_n = check_int(input("Digite a coluna final: "))
-    p = permutation(current_m, current_n, finale_m, finale_n, p)
-    system("cls") # limpar a tela do terminal a cada loop para não poluí-la
+    p = permutation(current_m, current_n, finale_m, finale_n, matriz)
