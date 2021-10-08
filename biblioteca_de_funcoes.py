@@ -60,12 +60,22 @@ def print_matriz(matriz): # printa matruz recebida como parâmetro
         print(matriz[i])
         
 def permutation(current_m, current_n, finale_m, finale_n, matriz): # realiza a permutação dos itens da matriz
-    '''while ((finale_m - current_m != 0) and (finale_n - current_n != 0)) or ((abs(current_m - finale_m) != 1) and (current_m != current_n)) or ((abs(current_n - finale_n != 1) and (current_n != finale_n))):
+    while (finale_m != (current_m + 1)) and (finale_m != (current_m - 1)) and (current_m != finale_m):
         print("Erro! Permutação inválida!")
+        current_m = check_int(input("Digite a linha atual: "))
+        current_n = check_int(input("Digite a coluna atual: "))
         finale_m = check_int(input("Digite a linha final: "))
-        finale_n = check_int(input("Digite a coluna final: "))''' # como essa parte da verificação ainda está dando erro eu não ativei
+        finale_n = check_int(input("Digite a coluna final: ")) 
         # Quando a linha incial e final são iguais da erro
 
+    while (finale_n != (current_n + 1)) and (finale_n != (current_n - 1)) and (current_n != finale_n):
+        print("Erro! Permutação inválida!")
+        current_m = check_int(input("Digite a linha atual: "))
+        current_n = check_int(input("Digite a coluna atual: "))
+        finale_m = check_int(input("Digite a linha final: "))
+        finale_n = check_int(input("Digite a coluna final: ")) 
+        # Quando a linha incial e final são iguais da erro
+        
     x = matriz[current_m-1][current_n-1]
     y = matriz[finale_m-1][finale_n-1]
     matriz[current_m-1][current_n-1] = y
@@ -122,11 +132,9 @@ def punctuation(matriz, size, point): # calcula a pontuação do jogo
                     point += 1
 
     print(f'Pontos: {point}')
-    # provavelmente quando a gravidade for adicionada corretamente deve ter que retornar "point"
+    return point
 
 def gravity(matriz, size): # só faz uma verificação
-    from random import choice
-    condition = True
     quant = 0
     
     for i in range(size): # faz as gemas cairem
