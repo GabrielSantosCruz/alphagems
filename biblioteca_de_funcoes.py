@@ -87,33 +87,31 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
     
     return matriz
 
-def break_gens_line(matriz, size): # quebra de gemas nas linhas
+def break_gens(matriz, size): # quebra as gemas
     for i in range(size):
-            quant = 1
-            for j in range(size):
-                if j > 0:   # para corrigir o erro de Index saindo do range
-                    if matriz[i][j] == matriz[i][j-1]: 
-                        quant +=1
-                        if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
-                            for k in range(1, quant+1):                      
-                                matriz[i][(j+1)-k] = matriz[i][(j+1)-k].lower()
-                            quant = 1                    
+        quant = 1
+        for j in range(size):
+            if j > 0:   # para corrigir o erro de Index saindo do range
+                if (matriz[i][j] == matriz[i][j-1]) or (matriz[i][j].lower() == matriz[i][j-1]): 
+                    quant +=1
+                    if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
+                        for k in range(1, quant+1):                      
+                            matriz[i][(j+1)-k] = matriz[i][(j+1)-k].lower()
+                        quant = 1                    
+                else:
+                    if quant >= 3:
+                        for k in range(1, quant+1):                            
+                            matriz[i][j-k] = matriz[i][j-k].lower()
+                        quant = 1
                     else:
-                        if quant >= 3:
-                            for k in range(1, quant+1):                            
-                                matriz[i][j-k] = matriz[i][j-k].lower()
-                            quant = 1
-                        else:
-                            quant = 1
-    return matriz
-
-def break_gens_colune(matriz, size): # quebra de gemas na coluna
-    for i in range(size): # colocar pra comparar com minusculas e transformar em minúsculas em vez de quebrar
+                        quant = 1
+    
+    for i in range(size):
             quant = 1
             for j in range(size):
 
                 if j > 0: 
-                    if matriz[j][i] == matriz[j-1][i]:
+                    if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]):
                         quant +=1
                         if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
@@ -128,7 +126,7 @@ def break_gens_colune(matriz, size): # quebra de gemas na coluna
                         else:
                             quant = 1
     return matriz
-
+    
 def punctuation(matriz, size, point): # calcula a pontuação do jogo
     for i in range(size):            
             for j in range(size):
@@ -139,10 +137,12 @@ def punctuation(matriz, size, point): # calcula a pontuação do jogo
     return point
 
 def smash(matriz, size):
-        for i in range(size):            
-            for j in range(size):
-                if matriz[i][j].islower():
-                    matriz[i][j] = ' '
+    for i in range(size):            
+        for j in range(size):
+            if matriz[i][j].islower():
+                matriz[i][j] = ' '
+    
+    return matriz
 
 def gravity(matriz, size): # só faz uma verificação
     quant = 0
@@ -164,7 +164,6 @@ def validation_in_matriz(matriz, size):
 def generate_in_line(matriz, size):
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
-    colors = colors[0:size]
     
     for i in range(size):
         for j in range(size):
@@ -195,11 +194,13 @@ def check_points(matriz, size):
                         quant +=1
                         if quant >= 3:
                             return True
-                   
+                        else:
+                            return False
                     else:
                         if quant >= 3:
                             return True
-    return matriz    
+                        else:
+                            return False
 
 def parar_de_cair(matriz, size, point):
     a = True

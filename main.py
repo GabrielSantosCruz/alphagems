@@ -15,38 +15,39 @@ from biblioteca_de_funcoes import *
 menu()
 
 size = check_number_matriz(input('Digite o tamanho da matriz: '))
-#p = build_matriz(size)
-p = [
+#matriz = build_matriz(size)
+matriz = [
 ['B', 'F', 'B', 'D', 'D', 'G', 'C'],
-['E', 'E', 'E', 'F', 'F', 'C', 'D'],
-['E', 'G', 'E', 'G', 'A', 'E', 'E'],
-['F', 'A', 'E', 'F', 'B', 'E', 'A'],
+['E', 'E', 'D', 'F', 'F', 'C', 'D'],
+['G', 'G', 'G', 'G', 'A', 'E', 'E'],
+['F', 'E', 'G', 'F', 'B', 'E', 'A'],
 ['D', 'D', 'G', 'B', 'F', 'D', 'C'],
-['A', 'E', 'G', 'E', 'A', 'C', 'E'],
+['A', 'E', 'A', 'E', 'A', 'C', 'E'],
 ['A', 'A', 'C', 'C', 'D', 'D', 'B']]
 point = 0
 
 while True:
-    print_matriz(p)
+    print_matriz(matriz)
     print('='*50)
     #system("cls")
     a = True
     b = True
-    while (a and b):
-        matriz = break_gens_line(p, size)
-        matriz = break_gens_colune(p, size)
-        point = punctuation(p, size, point)
-        matriz = smash(p, size)
-        matriz = gravity(p, size)
-        matriz = generate_in_line(p, size)
-        a = verfication(p, size)
-        b = check_points(p, size)
+    while not ((a == False) and (b == False)): # tenho que fazer entrar nesse loop
+        break_gens(matriz, size)
+        point = punctuation(matriz, size, point)
+        smash(matriz, size)
+        gravity(matriz, size)
+        generate_in_line(matriz, size)
+        a = verfication(matriz, size) # enquanto houver espaços em branco tem que continuar
+        b = check_points(matriz, size) # enquanto houver quebras tem que continuar
+        print_matriz(matriz)
+        print('='*50)
 
-    print_matriz(p)
+    print_matriz(matriz)
     current_m = check_int(input("Digite a linha atual: "))
     current_n = check_int(input("Digite a coluna atual: "))
     finale_m = check_int(input("Digite a linha final: "))
     finale_n = check_int(input("Digite a coluna final: "))
-    p = permutation(current_m, current_n, finale_m, finale_n, matriz, size  )
+    matriz = permutation(current_m, current_n, finale_m, finale_n, matriz, size)
     
     # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)
