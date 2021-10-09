@@ -15,15 +15,15 @@ from biblioteca_de_funcoes import *
 menu()
 
 size = check_number_matriz(input('Digite o tamanho da matriz: '))
-p = build_matriz(size)
-'''p = [
+#p = build_matriz(size)
+p = [
 ['B', 'F', 'B', 'D', 'D', 'G', 'C'],
 ['E', 'E', 'E', 'F', 'F', 'C', 'D'],
-['E', 'G', 'C', 'G', 'A', 'E', 'E'],
-['F', 'A', 'G', 'F', 'B', 'E', 'A'],
+['E', 'G', 'E', 'G', 'A', 'E', 'E'],
+['F', 'A', 'E', 'F', 'B', 'E', 'A'],
 ['D', 'D', 'G', 'B', 'F', 'D', 'C'],
 ['A', 'E', 'G', 'E', 'A', 'C', 'E'],
-['A', 'A', 'C', 'C', 'D', 'D', 'B']]'''
+['A', 'A', 'C', 'C', 'D', 'D', 'B']]
 point = 0
 
 while True:
@@ -36,6 +36,7 @@ while True:
         matriz = break_gens_line(p, size)
         matriz = break_gens_colune(p, size)
         point = punctuation(p, size, point)
+        matriz = smash(p, size)
         matriz = gravity(p, size)
         matriz = generate_in_line(p, size)
         a = verfication(p, size)
