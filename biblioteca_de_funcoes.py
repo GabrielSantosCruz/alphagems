@@ -96,19 +96,19 @@ def break_gens_line(matriz, size): # quebra de gemas nas linhas
                         quant +=1
                         if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
-                                matriz[i][(j+1)-k] = ' '
+                                matriz[i][(j+1)-k] = matriz[i][(j+1)-k].lower()
                             quant = 1                    
                     else:
                         if quant >= 3:
                             for k in range(1, quant+1):                            
-                                matriz[i][j-k] = ' '
+                                matriz[i][j-k] = matriz[i][j-k].lower()
                             quant = 1
                         else:
                             quant = 1
     return matriz
 
 def break_gens_colune(matriz, size): # quebra de gemas na coluna
-    for i in range(size):
+    for i in range(size): # colocar pra comparar com minusculas e transformar em minúsculas em vez de quebrar
             quant = 1
             for j in range(size):
 
@@ -117,13 +117,13 @@ def break_gens_colune(matriz, size): # quebra de gemas na coluna
                         quant +=1
                         if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
-                                matriz[(j+1)-k][i] = ' '
+                                matriz[(j+1)-k][i] = matriz[(j+1)-k][i].lower()
                             quant = 1
                    
                     else:
                         if quant >= 3:
                             for k in range(1, quant+1):                         
-                                matriz[j-k][i] = ' '
+                                matriz[j-k][i] = matriz[j-k][i].lower()
                             quant = 1
                         else:
                             quant = 1
@@ -132,11 +132,17 @@ def break_gens_colune(matriz, size): # quebra de gemas na coluna
 def punctuation(matriz, size, point): # calcula a pontuação do jogo
     for i in range(size):            
             for j in range(size):
-                if matriz[i][j] == ' ':
+                if matriz[i][j] == matriz[i][j].lower():
                     point += 1
 
     print(f'Pontos: {point}')
     return point
+
+def smash(matriz, size):
+        for i in range(size):            
+            for j in range(size):
+                if matriz[i][j].islower():
+                    matriz[i][j] = ' '
 
 def gravity(matriz, size): # só faz uma verificação
     quant = 0
@@ -145,7 +151,6 @@ def gravity(matriz, size): # só faz uma verificação
         for j in range(size-1, 0, -1):
             for k in range(size-1, -1, -1):
                 if matriz[j][k] == ' ':
-                    #condition = True
                     matriz[j][k], matriz[j-1][k] = matriz[j-1][k], matriz[j][k]
     
 def validation_in_matriz(matriz, size):
