@@ -21,11 +21,9 @@ def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
 
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
-
     colors = colors[0:size] # lista com as cores
-
-    line = [0] * size # cria a quantidade de colunas
-    matriz = [line] * size # cria a quantidade de linhas
+    linha = [0] * size
+    matriz = [linha] * size
 
     for l in range(size):
         line = []
@@ -45,7 +43,13 @@ def check_int(number):
     while not number.isdigit() or len(number) == 0 or int(number) < 0:
         number = input("Erro! Digite um valor válido: ")
     return int(number) # retorna o número já convertido
-    
+
+def check_permutation(number, size):
+    while not number.isdigit() or len(number) == 0 or int(number) < 0 or (int(number) > size):
+        number = input("Erro! Digite um valor válido: ")
+
+    return int(number) # retorna o número já convertido 
+
 def amount_colors(number): # cria uma lista com letras
     letras = ['A','B','C','D','E','F','G','H','I','J']
     colors = []
@@ -59,21 +63,21 @@ def print_matriz(matriz): # printa matruz recebida como parâmetro
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
         
-def permutation(current_m, current_n, finale_m, finale_n, matriz): # realiza a permutação dos itens da matriz
+def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # realiza a permutação dos itens da matriz
     while (finale_m != (current_m + 1)) and (finale_m != (current_m - 1)) and (current_m != finale_m):
         print("Erro! Permutação inválida!")
-        current_m = check_int(input("Digite a linha atual: "))
-        current_n = check_int(input("Digite a coluna atual: "))
-        finale_m = check_int(input("Digite a linha final: "))
-        finale_n = check_int(input("Digite a coluna final: ")) 
+        current_m = check_permutation(number(input("Digite a linha atual: ")), size)
+        current_n = check_permutation((input("Digite a coluna atual: ")), size)
+        finale_m = check_permutation((input("Digite a linha final: ")), size)
+        finale_n = check_permutation((input("Digite a coluna final: ")), size) 
         # Quando a linha incial e final são iguais da erro
 
     while (finale_n != (current_n + 1)) and (finale_n != (current_n - 1)) and (current_n != finale_n):
         print("Erro! Permutação inválida!")
-        current_m = check_int(input("Digite a linha atual: "))
-        current_n = check_int(input("Digite a coluna atual: "))
-        finale_m = check_int(input("Digite a linha final: "))
-        finale_n = check_int(input("Digite a coluna final: ")) 
+        current_m = check_permutation((input("Digite a linha atual: ")), size)
+        current_n = check_permutation((input("Digite a coluna atual: ")), size)
+        finale_m = check_permutation((input("Digite a linha final: ")), size)
+        finale_n = check_permutation((input("Digite a coluna final: ")), size) 
         # Quando a linha incial e final são iguais da erro
         
     x = matriz[current_m-1][current_n-1]
@@ -136,7 +140,7 @@ def punctuation(matriz, size, point): # calcula a pontuação do jogo
 
 def gravity(matriz, size): # só faz uma verificação
     quant = 0
-    
+
     for i in range(size): # faz as gemas cairem
         for j in range(size-1, 0, -1):
             for k in range(size-1, -1, -1):
@@ -154,11 +158,14 @@ def validation_in_matriz(matriz, size):
 
 def generate_in_line(matriz, size):
     from random import choice
-
+    colors = ['A','B','C','D','E','F','G','H','I','J']
+    colors = colors[0:size]
+    
     for i in range(size):
-        if matriz[0][i] == ' ':
-            y = choice(colors[0:size])
-            matriz[0][i] = y
+        for j in range(size):
+            if matriz[i][j] == ' ':
+                y = choice(colors[0:size])
+                matriz[i][j] = y
     
     return matriz
 
@@ -172,6 +179,22 @@ def verfication(matriz, size):
         return True
     else:
         return False
+
+def check_points(matriz, size):
+    for i in range(size):
+            quant = 1
+            for j in range(size):
+
+                if j > 0: 
+                    if matriz[j][i] == matriz[j-1][i]:
+                        quant +=1
+                        if quant >= 3:
+                            return True
+                   
+                    else:
+                        if quant >= 3:
+                            return True
+    return matriz    
 
 def parar_de_cair(matriz, size, point):
     a = True
