@@ -18,7 +18,6 @@ def menu():
 colors = ['A','B','C','D','E','F','G','H','I','J']
 
 def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
-
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
     colors = colors[0:size] # lista com as cores
@@ -29,8 +28,8 @@ def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
         line = []
         for c in range(size):
             x = choice(colors) # sorteia as letras a partir de uma lista
-            line.append(x)
-        matriz[l] = line
+            line.append(x) # adiciona a letra sorteada a lista
+        matriz[l] = line # adiciona a lista a matriz
 
     return matriz
 
@@ -47,19 +46,9 @@ def check_int(number):
 def check_permutation(number, size):
     while not number.isdigit() or len(number) == 0 or int(number) < 0 or (int(number) > size):
         number = input("Erro! Digite um valor válido: ")
-
     return int(number) # retorna o número já convertido 
 
-def amount_colors(number): # cria uma lista com letras
-    letras = ['A','B','C','D','E','F','G','H','I','J']
-    colors = []
-    for i in range(number):
-        colors.append(letras[i])
-    return colors
-    print(colors)
-    return colors
-
-def print_matriz(matriz): # printa matruz recebida como parâmetro
+def print_matriz(matriz): # printa a matriz recebida
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(matriz[i])
         
@@ -84,7 +73,7 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
     y = matriz[finale_m-1][finale_n-1]
     matriz[current_m-1][current_n-1] = y
     matriz[finale_m-1][finale_n-1] = x
-    
+    # parte responsável por fazer as trocas das gemas
     return matriz
 
 def break_gens(matriz, size): # quebra as gemas
@@ -110,7 +99,7 @@ def break_gens(matriz, size): # quebra as gemas
             quant = 1
             for j in range(size):
 
-                if j > 0: 
+                if j > 0: # para corrigir o erro de Index saindo do range
                     if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]):
                         quant +=1
                         if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
@@ -126,7 +115,7 @@ def break_gens(matriz, size): # quebra as gemas
                         else:
                             quant = 1
     return matriz
-    
+
 def punctuation(matriz, size, point): # calcula a pontuação do jogo
     for i in range(size):            
             for j in range(size):
@@ -136,18 +125,18 @@ def punctuation(matriz, size, point): # calcula a pontuação do jogo
     print(f'Pontos: {point}')
     return point
 
-def smash(matriz, size):
+def smash(matriz, size): # quebra as gemas transformadas em letras minúsculas após a união de 3 ou mais
     for i in range(size):            
         for j in range(size):
-            if matriz[i][j].islower():
+            if matriz[i][j].islower(): # compara linha por linha se está minúscula
                 matriz[i][j] = ' '
     
     return matriz
 
-def gravity(matriz, size): # só faz uma verificação
+def gravity(matriz, size): # faz as gemas cairem
     quant = 0
 
-    for i in range(size): # faz as gemas cairem
+    for i in range(size):
         for j in range(size-1, 0, -1):
             for k in range(size-1, -1, -1):
                 if matriz[j][k] == ' ':
@@ -161,19 +150,19 @@ def validation_in_matriz(matriz, size):
 
     return matriz
 
-def generate_in_line(matriz, size):
+def generate_in_line(matriz, size): # preenche todo o tabuleiro após a gravidade agir
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
     
-    for i in range(size):
-        for j in range(size):
+    for i in range(size-1, -1, -1):
+        for j in range(size-1, -1, -1):
             if matriz[i][j] == ' ':
                 y = choice(colors[0:size])
                 matriz[i][j] = y
     
     return matriz
 
-def verfication(matriz, size):
+def verfication(matriz, size): # verifica se há espaços em branco na matriz
     quant = 0
     for i in range(size):
         for j in range(size):
