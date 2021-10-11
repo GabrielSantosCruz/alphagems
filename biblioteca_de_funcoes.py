@@ -218,27 +218,49 @@ def tips(matriz, size): # diz as dicas do jogo
     for i in range(size):
         quant = 1
         for j in range(size):
-            if ((i == 0) and (j > 0)) and (j < (size - 2)): # para quebras na primeira linha da horizontal na frente
+            # para combinações a direita na horizontal
+            if ((i == 0) and (j > 0)) and (j < (size - 2)): # para quebras na primeira linha na horizontal na direita
                 if matriz[i][j] == matriz[i][j-1]:
                     if matriz[i][j] == matriz[i+1][j+1]:
                         print(f'Dica: {i+2}.{j+2}')  
-                    if matriz[i][j] == matriz[i][j+2]: # erro de index
+                    elif matriz[i][j] == matriz[i][j+2]:
                         print(f'Dica: {i+1}.{j+3}')                                          
-            if (j > 0) and (j < (size-1)) and ((i > 0) and (i < (size-1))): # quebras no meio da horizontal na frente
+            if (j > 0) and (j < (size-2)) and ((i > 0) and (i < (size-1))): # quebras no meio na horizontal na direita
                 if matriz[i][j] == matriz[i][j-1]: 
                     if matriz[i][j] == matriz[i-1][j+1]:
                         print(f'Dica: {i}.{j+2}')
-                    if matriz[i][j] == matriz[i+1][j+1]:
+                    elif matriz[i][j] == matriz[i+1][j+1]:
                         print(f'Dica: {i+2}.{j+2}')
-                    if matriz[i][j] == matriz[i][j+2]:
+                    elif matriz[i][j] == matriz[i][j+2]: # erro de index
                         print(f'Dica: {i+1}.{j+3}')
-            if ((i == (size - 1)) and (j > 0)) and (j < (size - 1)): # quebras na linha final da horizontal na frente
+            if ((i == (size - 1)) and (j > 0)) and (j < (size - 1)): # quebras na linha final na horizontal na direita
                 if matriz[i][j] == matriz[i][j-1]:
                     if matriz[i][j] == matriz[i-1][j+1]:
                         print(f'Dica: {i}.{j+2}')
-                    if matriz[i][j] == matriz[i][j+2]:
+                    elif matriz[i][j] == matriz[i][j+2]:
                         print(f'Dica: {i+1}.{j+3}')
-            if (j > 0) and (i == 0): # para quebras na primeira linha da horizontal atrás
+                                            
+            # para combinações a esquerda na horizontal
+            if (j > 0) and (i == 0): # para quebras na primeira linha da matriz
                 if matriz[i][j] == matriz[i][j-1]:
                     if matriz[i][j-1] == matriz[i+1][j-2]:
                         print(f'Dica: {i+2}.{j-1}')
+                    if (j > 1) and (i == 0):
+                        if matriz[i][j-1] == matriz[i+1][j-2]:
+                            print(f'Dica: {i+2}.{j-1}')
+                        elif matriz[i][j-1] == matriz[i][j-3]:
+                            print(f'Dica: {i+1}.{j-2}')
+            if (j > 0) and ((i > 0) and (i < (size - 1))): # para quebra de gemas nas linhas no meio da matriz
+                if matriz[i][j] == matriz[i][j-1]:
+                    if matriz[i][j-1] == matriz[i+1][j-2]:
+                        print(f'Dica: {i+2}.{j-1}')
+                    elif matriz[i][j-1] == matriz[i-1][j-2]:
+                        print(f'Dica: {i+1}.{j-1}')
+                if (j > 1) and ((i > 0) and (i < (size - 1))):
+                    if matriz[i][j] == matriz[i][j-1]:
+                        if matriz[i][j-1] == matriz[i+1][j-2]:
+                            print(f'Dica: {i+2}.{j-1}')
+                        elif matriz[i][j-1] == matriz[i-1][j-2]:
+                            print(f'Dica: {i+1}.{j-1}')     
+                        elif matriz[i][j-1] == matriz[i][j-2]:
+                            print(f'Dica: {i+1}.{j-1}')
