@@ -218,13 +218,13 @@ def tips(matriz, size): # diz as dicas do jogo
     for i in range(size):
         quant = 1
         for j in range(size):
-            if ((i == 0) and (j > 0)) and (j < (size - 1)): # para quebras na primeira linha
+            if ((i == 0) and (j > 0)) and (j < (size - 2)): # para quebras na primeira linha da horizontal na frente
                 if matriz[i][j] == matriz[i][j-1]:
                     if matriz[i][j] == matriz[i+1][j+1]:
                         print(f'Dica: {i+2}.{j+2}')  
-                    if matriz[i][j] == matriz[i][j+2]:
+                    if matriz[i][j] == matriz[i][j+2]: # erro de index
                         print(f'Dica: {i+1}.{j+3}')                                          
-            if (j > 0) and (j < (size-1)) and ((i > 0) and (i < (size-1))): # quebras no meio
+            if (j > 0) and (j < (size-1)) and ((i > 0) and (i < (size-1))): # quebras no meio da horizontal na frente
                 if matriz[i][j] == matriz[i][j-1]: 
                     if matriz[i][j] == matriz[i-1][j+1]:
                         print(f'Dica: {i}.{j+2}')
@@ -232,9 +232,13 @@ def tips(matriz, size): # diz as dicas do jogo
                         print(f'Dica: {i+2}.{j+2}')
                     if matriz[i][j] == matriz[i][j+2]:
                         print(f'Dica: {i+1}.{j+3}')
-            if ((i == (size - 1)) and (j > 0)) and (j < (size - 1)):
+            if ((i == (size - 1)) and (j > 0)) and (j < (size - 1)): # quebras na linha final da horizontal na frente
                 if matriz[i][j] == matriz[i][j-1]:
                     if matriz[i][j] == matriz[i-1][j+1]:
                         print(f'Dica: {i}.{j+2}')
                     if matriz[i][j] == matriz[i][j+2]:
                         print(f'Dica: {i+1}.{j+3}')
+            if (j > 0) and (i == 0): # para quebras na primeira linha da horizontal atrás
+                if matriz[i][j] == matriz[i][j-1]:
+                    if matriz[i][j-1] == matriz[i+1][j-2]:
+                        print(f'Dica: {i+2}.{j-1}')
