@@ -34,7 +34,7 @@ def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
     return matriz
 
 def check_number_matriz(number): # verificar se o número digitado é inteiro
-    while not number.isdigit() or len(number) == 0 or int(number) > 10 or int(number) < 3:
+    while not number.isdigit() or len(number) == 0 or int(number) > 10 or int(number) < 3: # verifica se o tamanho está de acordo
         number = input("Erro! Digite um valor válido: ")
     return int(number) # retorna o número já convertido
 
@@ -77,11 +77,11 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
     return matriz
 
 def break_gens(matriz, size): # quebra as gemas
-    for i in range(size):
+    for i in range(size): # horizontal
         quant = 1
         for j in range(size):
             if j > 0:   # para corrigir o erro de Index saindo do range
-                if (matriz[i][j] == matriz[i][j-1]) or (matriz[i][j].lower() == matriz[i][j-1]): 
+                if (matriz[i][j] == matriz[i][j-1]) or (matriz[i][j].lower() == matriz[i][j-1]) or (matriz[i][j-1] == matriz[i][j].lower()): 
                     quant +=1
                     if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                         for k in range(1, quant+1):                      
@@ -95,12 +95,12 @@ def break_gens(matriz, size): # quebra as gemas
                     else:
                         quant = 1
     
-    for i in range(size):
+    for i in range(size): # vertical
             quant = 1
             for j in range(size):
 
                 if j > 0: # para corrigir o erro de Index saindo do range
-                    if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]):
+                    if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]) or (matriz[j-1][i] == matriz[j][i].lower()):
                         quant +=1
                         if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
@@ -116,13 +116,15 @@ def break_gens(matriz, size): # quebra as gemas
                             quant = 1
     return matriz
 
+
+
 def punctuation(matriz, size, point): # calcula a pontuação do jogo
     for i in range(size):            
             for j in range(size):
-                if matriz[i][j] == matriz[i][j].lower():
+                if matriz[i][j].islower():
                     point += 1
 
-    print(f'Pontos: {point}')
+    #print(f'Pontos: {point}')
     return point
 
 def smash(matriz, size): # quebra as gemas transformadas em letras minúsculas após a união de 3 ou mais
@@ -141,6 +143,8 @@ def gravity(matriz, size): # faz as gemas cairem
             for k in range(size-1, -1, -1):
                 if matriz[j][k] == ' ':
                     matriz[j][k], matriz[j-1][k] = matriz[j-1][k], matriz[j][k]
+        
+    return matriz
     
 def validation_in_matriz(matriz, size):
     for i in range(size): # para conferir se há mais permutações para fazer
@@ -210,81 +214,39 @@ def check_points(matriz, size): # retorna True para quando houver encontro de 3 
                         quant = 1
     return False
 
-def tips(matriz, size): # diz as dicas do jogo
-    for i in range(size):
-        quant = 1
-        for j in range(size):
-            # para combinações a direita na horizontal
-            if ((i == 0) and (j > 0)) and (j < (size - 2)): # para quebras na primeira linha na horizontal na direita
-                if matriz[i][j] == matriz[i][j-1]:
-                    if matriz[i][j] == matriz[i+1][j+1]:
-                        print(f'Dica: {i+2}.{j+2}')  
-                    elif matriz[i][j] == matriz[i][j+2]:
-                        print(f'Dica: {i+1}.{j+3}')                                          
-            if (j > 0) and (j < (size-2)) and ((i > 0) and (i < (size-1))): # quebras no meio na horizontal na direita
-                if matriz[i][j] == matriz[i][j-1]: 
-                    if matriz[i][j] == matriz[i-1][j+1]:
-                        print(f'Dica: {i}.{j+2}')
-                    elif matriz[i][j] == matriz[i+1][j+1]:
-                        print(f'Dica: {i+2}.{j+2}')
-                    elif matriz[i][j] == matriz[i][j+2]:
-                        print(f'Dica: {i+1}.{j+3}')
-            if ((i == (size - 1)) and (j > 0)) and (j < (size - 1)): # quebras na linha final na horizontal na direita
-                if matriz[i][j] == matriz[i][j-1]:
-                    if matriz[i][j] == matriz[i-1][j+1]:
-                        print(f'Dica: {i}.{j+2}')
-                    elif matriz[i][j] == matriz[i][j+2]:
-                        print(f'Dica: {i+1}.{j+3}')
-                                            
-            # para combinações a esquerda na horizontal
-            if (j > 0) and (i == 0): # para quebras na primeira linha da matriz
-                if matriz[i][j] == matriz[i][j-1]:
-                    if matriz[i][j-1] == matriz[i+1][j-2]:
-                        print(f'Dica: {i+2}.{j-1}')
-                    if (j > 1) and (i == 0):
-                        if matriz[i][j-1] == matriz[i+1][j-2]: #conferi pq ta igual 
-                            print(f'Dica: {i+2}.{j-1}')
-                        elif matriz[i][j-1] == matriz[i][j-3]:
-                            print(f'Dica: {i+1}.{j-2}')
-            if (j > 0) and ((i > 0) and (i < (size - 1))): # para quebra de gemas nas linhas no meio da matriz
-                if matriz[i][j] == matriz[i][j-1]:
-                    if matriz[i][j-1] == matriz[i+1][j-2]:
-                        print(f'Dica: {i+2}.{j-1}')
-                    elif matriz[i][j-1] == matriz[i-1][j-2]:
-                        print(f'Dica: {i+1}.{j-1}')
-                if (j > 1) and ((i > 0) and (i < (size - 1))):
-                    if matriz[i][j] == matriz[i][j-1]:
-                        if matriz[i][j-1] == matriz[i+1][j-2]:
-                            print(f'Dica: {i+2}.{j-1}')
-                        elif matriz[i][j-1] == matriz[i-1][j-2]:
-                            print(f'Dica: {i+1}.{j-1}')     
-                        elif matriz[i][j-1] == matriz[i][j-2]:
-                            print(f'Dica: {i+1}.{j-1}')
-            if (j > 0) and (i == (size-1)): # para quebras na ultima linha da matriz
-                if matriz[i][j] == matriz[i][j-1]:
-                    if matriz[i][j-1] == matriz[i+1][j-2]:
-                        print(f'Dica: {i+2}.{j-1}')
-                    if (j > 1) and (i == size):
-                        if matriz[i][j-1] == matriz[i+1][j-2]:
-                            print(f'Dica: {i+2}.{j-1}')
-                        elif matriz[i][j-1] == matriz[i][j-3]:
-                            print(f'Dica: {i+1}.{j-2}')                            
-
-def teste(matriz, size):
-    a = ' '
-    quant = 0
-    for i in range(size):
-        for j in range(size):
-            if a == matriz[i][j]:
-                quant +=1 
-                print(f'sla: {quant}')
-            else: 
-                print('funfou n')
+def tips(matriz, size): # as dicas de um jeito meio brutal-force testando todos movimentos possíveis
+    for i in range(size): # para testar todas permutações na horizontal
+        for j in range(size-1):
             a = matriz[i][j]
+            b = matriz[i][j+1]
+            matriz[i][j] = b
+            matriz[i][j+1] = a
+            if check_points(matriz, size):
+                matriz[i][j] = a
+                matriz[i][j+1] = b
+                return True, i , (j+1)
+            else:
+                matriz[i][j] = a
+                matriz[i][j+1] = b  
 
-def validar_permuta(matriz, size):
-    for i in range(size):
-        for j in range(size):
-            n = teste
+    for i in range(size): # para testar todas permutações na vertical
+        for j in range(size-1):
+            a = matriz[j][i]
+            b = matriz[j+1][i]
+            matriz[j][i] = b
+            matriz[j+1][i] = a
+            if check_points(matriz, size):
+                matriz[j][i] = a
+                matriz[j+1][i] = b
+                return True, (j+1), i
+            else:
+                matriz[j][i] = a
+                matriz[j+1][i] = b
 
-# testar todas possibilidades com j+1 permutando e retornar i e j quando permutar
+    return False
+
+def validation_of_opition(option):
+    while option not in 'MmDd' or len(option) == 0:
+        print('Digite apenas M ou D!!')
+        option = input('Aperte M para mover ou D para dicas [M/D]: ')
+    return option

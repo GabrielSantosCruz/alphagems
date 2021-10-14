@@ -15,43 +15,62 @@ from biblioteca_de_funcoes import *
 menu()
 
 #size = check_number_matriz(input('Digite o tamanho da matriz: '))
-#size = 5
-#matriz = build_matriz(size)
+size = 3
+matriz = build_matriz(size)
 '''matriz = [
-['C', 'D', 'D', 'A', 'D'],
-['A', 'A', 'A', 'C', 'D'],
-['A', 'B', 'D', 'A', 'A'],
-['E', 'A', 'D', 'D', 'D'],
-['D', 'A', 'B', 'E', 'C']]'''
+['C', 'A', 'C'],
+['C', 'B', 'A'],
+['B', 'A', 'C']]'''
 '''matriz = [
-['C', 'C', 'E', 'E', 'B'],
-['C', 'D', 'E', 'A', 'D'],
-['A', 'B', 'D', 'C', 'D'],
-['E', 'A', 'C', 'A', 'A'],
-['D', 'A', 'B', 'E', 'C']]'''
+['B', 'C', 'B'],
+['B', 'A', 'B'],
+['A', 'A', 'C']]'''
 
+    
+print_matriz(matriz)
 point = 0
 
-while True:
-    print_matriz(matriz)
-    print('=~'*25)
+a = tips(matriz, size)
+
+while a:
     #system("cls")
-    b = check_points(matriz, size)
-    while b: # tenho que fazer entrar nesse loop
+
+    while check_points(matriz, size): 
         break_gens(matriz, size)
         point = punctuation(matriz, size, point)
         smash(matriz, size)
         gravity(matriz, size)
         generate_in_line(matriz, size)
+        print(point)
         print_matriz(matriz)
-        print('=~'*25)
-        b = check_points(matriz, size)
-
-    print_matriz(matriz)
-    current_m = check_int(input("Digite a linha atual: "))
-    current_n = check_int(input("Digite a coluna atual: "))
-    finale_m = check_int(input("Digite a linha final: "))
-    finale_n = check_int(input("Digite a coluna final: "))
-    matriz = permutation(current_m, current_n, finale_m, finale_n, matriz, size)
+    a = tips(matriz, size)
     
+    option = validation_of_opition(str(input('Aperte M para mover ou D para dicas [M/D]: ').upper()))
+    
+    if option == 'D':
+        c, linha, coluna = tips(matriz, size)
+        print(f'Dica: {linha+1}.{coluna+1}')
+
+    elif option == 'M':
+        current_m = check_int(input("Digite a linha atual: "))
+        current_n = check_int(input("Digite a coluna atual: "))
+        finale_m = check_int(input("Digite a linha final: "))
+        finale_n = check_int(input("Digite a coluna final: "))
+        matriz = permutation(current_m, current_n, finale_m, finale_n, matriz, size)
+
+print(f'''
+░██████╗░░█████╗░███╗░░░███╗███████╗  
+██╔════╝░██╔══██╗████╗░████║██╔════╝  
+██║░░██╗░███████║██╔████╔██║█████╗░░  
+██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  
+╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  
+░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  
+
+░█████╗░██╗░░░██╗███████╗██████╗░
+██╔══██╗██║░░░██║██╔════╝██╔══██╗
+██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
+Sua pontuação foi: {point}''')
     # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)
