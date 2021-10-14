@@ -173,46 +173,42 @@ def verfication(matriz, size): # verifica se há espaços em branco na matriz
     else:
         return False
 
-def check_points(matriz, size):
-    for i in range(size):
+def check_points(matriz, size): # retorna True para quando houver encontro de 3 ou mais gemas
+    
+    for i in range(size): # horizontal
         quant = 1
         for j in range(size):
             if j > 0:   # para corrigir o erro de Index saindo do range
                 if (matriz[i][j] == matriz[i][j-1]) or (matriz[i][j].lower() == matriz[i][j-1]): 
                     quant +=1
-                    if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
-                        for k in range(1, quant+1):                      
-                            quant = 1 
-                            return True
-                                           
+                    if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas                     
+                        quant = 1 
+                        return True 
+ 
+                else:
+                    if quant >= 3:                          
+                        quant = 1
+                        return True
+                    else:
+                        quant = 1
+
+    for i in range(size): # vertical
+        quant = 1
+        for j in range(size):
+            if j > 0: # para corrigir o erro de Index saindo do range
+                if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]):
+                    quant +=1
+                    if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas                    
+                        quant = 1
+                        return True
+
                 else:
                     if quant >= 3:
-                        for k in range(1, quant+1):                            
-                            quant = 1
-                            return True
-                            
+                        quant = 1
+                        return True
                     else:
-                        return False
-    
-    for i in range(size):
-            quant = 1
-            for j in range(size):
-
-                if j > 0: # para corrigir o erro de Index saindo do range
-                    if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]):
-                        quant +=1
-                        if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
-                            for k in range(1, quant+1):                      
-                                matriz[(j+1)-k][i] = matriz[(j+1)-k][i].lower()
-                            quant = 1
-                   
-                    else:
-                        if quant >= 3:
-                            for k in range(1, quant+1):                         
-                                matriz[j-k][i] = matriz[j-k][i].lower()
-                            quant = 1
-                        else:
-                            quant = 1
+                        quant = 1
+    return False
 
 def tips(matriz, size): # diz as dicas do jogo
     for i in range(size):
@@ -231,7 +227,7 @@ def tips(matriz, size): # diz as dicas do jogo
                         print(f'Dica: {i}.{j+2}')
                     elif matriz[i][j] == matriz[i+1][j+1]:
                         print(f'Dica: {i+2}.{j+2}')
-                    elif matriz[i][j] == matriz[i][j+2]: # erro de index
+                    elif matriz[i][j] == matriz[i][j+2]:
                         print(f'Dica: {i+1}.{j+3}')
             if ((i == (size - 1)) and (j > 0)) and (j < (size - 1)): # quebras na linha final na horizontal na direita
                 if matriz[i][j] == matriz[i][j-1]:
@@ -246,7 +242,7 @@ def tips(matriz, size): # diz as dicas do jogo
                     if matriz[i][j-1] == matriz[i+1][j-2]:
                         print(f'Dica: {i+2}.{j-1}')
                     if (j > 1) and (i == 0):
-                        if matriz[i][j-1] == matriz[i+1][j-2]:
+                        if matriz[i][j-1] == matriz[i+1][j-2]: #conferi pq ta igual 
                             print(f'Dica: {i+2}.{j-1}')
                         elif matriz[i][j-1] == matriz[i][j-3]:
                             print(f'Dica: {i+1}.{j-2}')
@@ -264,3 +260,31 @@ def tips(matriz, size): # diz as dicas do jogo
                             print(f'Dica: {i+1}.{j-1}')     
                         elif matriz[i][j-1] == matriz[i][j-2]:
                             print(f'Dica: {i+1}.{j-1}')
+            if (j > 0) and (i == (size-1)): # para quebras na ultima linha da matriz
+                if matriz[i][j] == matriz[i][j-1]:
+                    if matriz[i][j-1] == matriz[i+1][j-2]:
+                        print(f'Dica: {i+2}.{j-1}')
+                    if (j > 1) and (i == size):
+                        if matriz[i][j-1] == matriz[i+1][j-2]:
+                            print(f'Dica: {i+2}.{j-1}')
+                        elif matriz[i][j-1] == matriz[i][j-3]:
+                            print(f'Dica: {i+1}.{j-2}')                            
+
+def teste(matriz, size):
+    a = ' '
+    quant = 0
+    for i in range(size):
+        for j in range(size):
+            if a == matriz[i][j]:
+                quant +=1 
+                print(f'sla: {quant}')
+            else: 
+                print('funfou n')
+            a = matriz[i][j]
+
+def validar_permuta(matriz, size):
+    for i in range(size):
+        for j in range(size):
+            n = teste
+
+# testar todas possibilidades com j+1 permutando e retornar i e j quando permutar

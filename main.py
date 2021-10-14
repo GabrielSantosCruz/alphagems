@@ -14,34 +14,38 @@ from biblioteca_de_funcoes import *
 
 menu()
 
-size = check_number_matriz(input('Digite o tamanho da matriz: '))
+#size = check_number_matriz(input('Digite o tamanho da matriz: '))
+#size = 5
 #matriz = build_matriz(size)
-matriz = [
-['B', 'F', 'B', 'D', 'D', 'G', 'C'],
-['E', 'E', 'D', 'F', 'F', 'C', 'D'],
-['G', 'G', 'G', 'G', 'A', 'E', 'E'],
-['F', 'E', 'G', 'F', 'B', 'E', 'A'],
-['D', 'D', 'G', 'B', 'F', 'D', 'C'],
-['A', 'E', 'A', 'E', 'A', 'C', 'E'],
-['A', 'A', 'C', 'C', 'D', 'D', 'B']]
+'''matriz = [
+['C', 'D', 'D', 'A', 'D'],
+['A', 'A', 'A', 'C', 'D'],
+['A', 'B', 'D', 'A', 'A'],
+['E', 'A', 'D', 'D', 'D'],
+['D', 'A', 'B', 'E', 'C']]'''
+'''matriz = [
+['C', 'C', 'E', 'E', 'B'],
+['C', 'D', 'E', 'A', 'D'],
+['A', 'B', 'D', 'C', 'D'],
+['E', 'A', 'C', 'A', 'A'],
+['D', 'A', 'B', 'E', 'C']]'''
+
 point = 0
 
 while True:
     print_matriz(matriz)
-    print('='*50)
+    print('=~'*25)
     #system("cls")
-    a = True
-    b = True
-    while not ((a == False) and (b == False)): # tenho que fazer entrar nesse loop
+    b = check_points(matriz, size)
+    while b: # tenho que fazer entrar nesse loop
         break_gens(matriz, size)
         point = punctuation(matriz, size, point)
         smash(matriz, size)
         gravity(matriz, size)
         generate_in_line(matriz, size)
-        a = verfication(matriz, size) # enquanto houver espaços em branco tem que continuar
-        b = check_points(matriz, size) # enquanto houver quebras tem que continuar
         print_matriz(matriz)
-        print('='*50)
+        print('=~'*25)
+        b = check_points(matriz, size)
 
     print_matriz(matriz)
     current_m = check_int(input("Digite a linha atual: "))
