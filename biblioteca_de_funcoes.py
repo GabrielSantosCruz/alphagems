@@ -44,7 +44,7 @@ def check_int(number):
     return int(number) # retorna o número já convertido
 
 def check_permutation(number, size):
-    while not number.isdigit() or len(number) == 0 or int(number) < 0 or (int(number) > size):
+    while not number.isdigit() or len(number) == 0 or (int(number) < 0) or (int(number) > size):
         number = input("Erro! Digite um valor válido: ")
     return int(number) # retorna o número já convertido 
 
@@ -53,21 +53,20 @@ def print_matriz(matriz): # printa a matriz recebida
         print(matriz[i])
         
 def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # realiza a permutação dos itens da matriz
-    while (finale_m != (current_m + 1)) and (finale_m != (current_m - 1)) and (current_m != finale_m):
-        print("Erro! Permutação inválida!")
-        current_m = check_permutation(number(input("Digite a linha atual: ")), size)
-        current_n = check_permutation((input("Digite a coluna atual: ")), size)
-        finale_m = check_permutation((input("Digite a linha final: ")), size)
-        finale_n = check_permutation((input("Digite a coluna final: ")), size) 
-        # Quando a linha incial e final são iguais da erro
-
-    while (finale_n != (current_n + 1)) and (finale_n != (current_n - 1)) and (current_n != finale_n):
-        print("Erro! Permutação inválida!")
-        current_m = check_permutation((input("Digite a linha atual: ")), size)
-        current_n = check_permutation((input("Digite a coluna atual: ")), size)
-        finale_m = check_permutation((input("Digite a linha final: ")), size)
-        finale_n = check_permutation((input("Digite a coluna final: ")), size) 
-        # Quando a linha incial e final são iguais da erro
+    '''if (linha1 == linha2):
+    if abs(coluna1 - coluna2 == 1):
+        return True
+    elif (coluna1 == coluna2):
+    if abs(linha1 - linha2) == 1)):
+        return True
+    else:
+        return False'''
+    while not ((current_m == finale_m) and (abs(current_n - finale_n) == 1)) or ((current_n == finale_n) and (abs(current_m - finale_m) == 1)):
+        print('Permutação inválida! Tente novamente!')
+        current_m = check_permutation(input("Digite a linha atual: "),size)
+        current_n = check_permutation(input("Digite a coluna atual: "), size)
+        finale_m = check_permutation(input("Digite a linha final: "),size)
+        finale_n = check_permutation(input("Digite a coluna final: "),size)
         
     x = matriz[current_m-1][current_n-1]
     y = matriz[finale_m-1][finale_n-1]
