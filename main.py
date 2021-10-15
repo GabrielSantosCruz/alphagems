@@ -15,75 +15,91 @@ from biblioteca_de_funcoes import *
 
 home_menu()
 
-#size = check_number_matriz(input('Digite o tamanho da matriz: '))
-size = 5
-#matriz = build_matriz(size)
-matriz = [
-['H', 'B', 'E', 'H', 'H'],
-['C', 'H', 'E', 'G', 'C'],
-['A', 'D', 'F', 'A', 'B'],
-['E', 'I', 'C', 'F', 'H'],
-['H', 'G', 'F', 'B', 'H']]
-'''matriz = [
-['A', 'B', 'A'],
-['A', 'C', 'C'],
-['B', 'B', 'A']]'''
+option_menu = validation_of_menu(input('Digite a opção desejada: '))
 
-
-print_matriz(matriz)
-point = 0
-
-a = tips(matriz, size)
-
-while a:
-
-    while check_points(matriz, size):
-        
-        break_gens(matriz, size)
-        sleep(0.5)
-        system("cls")
-        print_matriz(matriz)
-        point = punctuation(matriz, size, point)
-        smash(matriz, size)
-        sleep(0.5)
-        system("cls")
-        print_matriz(matriz)
-        gravity(matriz, size)
-        sleep(0.5)
-        system("cls")
-        print_matriz(matriz)
-        generate_in_line(matriz, size)
-        sleep(0.5)
-        system("cls")
-        print_matriz(matriz)
-        print(f'Pontos: {point}')
-        sleep(0.5)
-        system("cls")
-        print_matriz(matriz)
-        print(f'Pontos: {point}')
-
+if option_menu == 1:
+    point = 0
+    option = 'm'
+    size = check_number_matriz(input('Digite o tamanho da matriz: '))
+    matriz = build_matriz(size)
+    print_matriz(matriz)
     a = tips(matriz, size)
+    while a:
 
-    if a: # para caso não houverem mais movimentos ele parar o loop de uma vez
-        option = validation_of_opition(str(input('Aperte M para mover ou D para dicas [M/D]: ').upper()))
+        while check_points(matriz, size):
+            
+            break_gens(matriz, size)
+            sleep(0.5)
+            system("cls")
+            print_matriz(matriz)
+            point = punctuation(matriz, size, point)
+            smash(matriz, size)
+            sleep(0.5)
+            system("cls")
+            print_matriz(matriz)
+            gravity(matriz, size)
+            sleep(0.5)
+            system("cls")
+            print_matriz(matriz)
+            generate_in_line(matriz, size)
+            sleep(0.5)
+            system("cls")
+            print_matriz(matriz)
+            print(f'Pontos: {point}')
+            sleep(0.5)
+            system("cls")
+            print_matriz(matriz)
+            print(f'Pontos: {point}')
 
-    if (option == 'D') and (point > 0) and a:
-        c, linha, coluna = tips(matriz, size)
-        sleep(0.5)
-        system("cls")
-        point -= 1
-        print_matriz(matriz)
-        print(f'Pontos: {point}')
-        print(f'Dica: {linha+1}.{coluna+1}')
+        a = tips(matriz, size)
 
-    elif (option == 'M') and a: # para caso não houverem mais movimentos ele parar o loop de uma vez
-        current_m = check_permutation(input("Digite a linha atual: "),size)
-        current_n = check_permutation(input("Digite a coluna atual: "), size)
-        finale_m = check_permutation(input("Digite a linha final: "),size)
-        finale_n = check_permutation(input("Digite a coluna final: "),size)
-        matriz = permutation(current_m, current_n, finale_m, finale_n, matriz, size)
-        #if not check_points(matriz, size):
+        if a: # para caso não houverem mais movimentos ele parar o loop de uma vez
+            option = validation_of_opition(str(input('Aperte M para mover ou D para dicas [M/D]: ').upper()))
 
-final_menu()
-print(f'Sua pontuação total foi: {point}')
-    # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)
+        if (option == 'D') and (point > 0) and a:
+            c, linha, coluna = tips(matriz, size)
+            sleep(0.5)
+            system("cls")
+            point -= 1
+            print_matriz(matriz)
+            print(f'Pontos: {point}')
+            print(f'Dica: {linha+1}.{coluna+1}')
+
+        elif (option == 'M') and a: # para caso não houverem mais movimentos ele parar o loop de uma vez
+            current_m = check_permutation(input("Digite a linha atual: "),size)
+            current_n = check_permutation(input("Digite a coluna atual: "), size)
+            finale_m = check_permutation(input("Digite a linha final: "),size)
+            finale_n = check_permutation(input("Digite a coluna final: "),size)
+            matriz = permutation(current_m, current_n, finale_m, finale_n, matriz, size)
+            #if not check_points(matriz, size):
+
+    final_menu()
+    print(f'Sua pontuação total foi: {point}')
+        # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)
+
+elif option_menu == 2:
+    sleep(0.5)
+    system('cls')
+    print('''
+
+    A permutação do jogo funciona com base nas cordenadas das peças
+
+                1    2    3    4    5
+            1 ['H', 'B', 'E', 'H', 'H']
+            2 ['C', 'H', 'E', 'G', 'C']
+            3 ['A', 'D', 'F', 'A', 'B']
+            4 ['E', 'I', 'C', 'F', 'H']
+            5 ['H', 'G', 'F', 'B', 'H']
+            
+    EX: 
+    Digite a linha atual: 4
+    Digite a coluna atual: 4
+    Digite a linha final: 4
+    Digite a coluna final: 3
+
+                1    2    3    4    5
+            1 ['H', 'B', 'E', 'H', 'H']
+            2 ['C', 'H', 'E', 'G', 'C']
+            3 ['A', 'D', 'F', 'A', 'B']
+            4 ['E', 'I', 'F', 'C', 'H']
+            5 ['H', 'G', 'F', 'B', 'H']''')
