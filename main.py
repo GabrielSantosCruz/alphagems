@@ -10,67 +10,80 @@ do código, e estou ciente que estes trechos não serão considerados para fins 
 O código e sua evolução pode ser encontrado em: https://github.com/GabrielSantosCruz/alphagens
 ******************************************************************************************/'''
 from os import system
+from time import sleep
 from biblioteca_de_funcoes import *
 
-menu()
+home_menu()
 
 #size = check_number_matriz(input('Digite o tamanho da matriz: '))
-size = 3
-matriz = build_matriz(size)
+size = 5
+#matriz = build_matriz(size)
+matriz = [
+['H', 'B', 'E', 'H', 'H'],
+['C', 'H', 'E', 'G', 'C'],
+['A', 'D', 'F', 'A', 'B'],
+['E', 'I', 'C', 'F', 'H'],
+['H', 'G', 'F', 'B', 'H']]
 '''matriz = [
-['C', 'A', 'C'],
-['C', 'B', 'A'],
-['B', 'A', 'C']]'''
-'''matriz = [
-['B', 'C', 'B'],
-['B', 'A', 'B'],
-['A', 'A', 'C']]'''
+['A', 'B', 'A'],
+['A', 'C', 'C'],
+['B', 'B', 'A']]'''
 
-    
+
 print_matriz(matriz)
 point = 0
 
 a = tips(matriz, size)
 
 while a:
-    #system("cls")
 
-    while check_points(matriz, size): 
+    while check_points(matriz, size):
+        
         break_gens(matriz, size)
+        sleep(0.5)
+        system("cls")
+        print_matriz(matriz)
         point = punctuation(matriz, size, point)
         smash(matriz, size)
-        gravity(matriz, size)
-        generate_in_line(matriz, size)
-        print(point)
+        sleep(0.5)
+        system("cls")
         print_matriz(matriz)
+        gravity(matriz, size)
+        sleep(0.5)
+        system("cls")
+        print_matriz(matriz)
+        generate_in_line(matriz, size)
+        sleep(0.5)
+        system("cls")
+        print_matriz(matriz)
+        print(f'Pontos: {point}')
+        sleep(0.5)
+        system("cls")
+        print_matriz(matriz)
+        print(f'Pontos: {point}')
+
     a = tips(matriz, size)
-    
-    option = validation_of_opition(str(input('Aperte M para mover ou D para dicas [M/D]: ').upper()))
-    
-    if option == 'D':
+
+    if a: # para caso não houverem mais movimentos ele parar o loop de uma vez
+        option = validation_of_opition(str(input('Aperte M para mover ou D para dicas [M/D]: ').upper()))
+
+    if (option == 'D') and (point > 0) and a:
         c, linha, coluna = tips(matriz, size)
+        sleep(0.5)
+        system("cls")
+        point -= 1
+        print_matriz(matriz)
+        print(f'Pontos: {point}')
         print(f'Dica: {linha+1}.{coluna+1}')
 
-    elif option == 'M':
-        current_m = check_int(input("Digite a linha atual: "))
-        current_n = check_int(input("Digite a coluna atual: "))
-        finale_m = check_int(input("Digite a linha final: "))
-        finale_n = check_int(input("Digite a coluna final: "))
+    elif (option == 'M') and a: # para caso não houverem mais movimentos ele parar o loop de uma vez
+        current_m = check_permutation(input("Digite a linha atual: "),size)
+        current_n = check_permutation(input("Digite a coluna atual: "), size)
+        finale_m = check_permutation(input("Digite a linha final: "),size)
+        finale_n = check_permutation(input("Digite a coluna final: "),size)
         matriz = permutation(current_m, current_n, finale_m, finale_n, matriz, size)
+        #if not check_points(matriz, size):
 
-print(f'''
-░██████╗░░█████╗░███╗░░░███╗███████╗  
-██╔════╝░██╔══██╗████╗░████║██╔════╝  
-██║░░██╗░███████║██╔████╔██║█████╗░░  
-██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  
-╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  
-░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  
-
-░█████╗░██╗░░░██╗███████╗██████╗░
-██╔══██╗██║░░░██║██╔════╝██╔══██╗
-██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
-██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
-╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
-░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝
-Sua pontuação foi: {point}''')
+final_menu()
+print(f'Sua pontuação total foi: {point}')
     # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)

@@ -1,4 +1,6 @@
-def menu():
+from os import system
+from time import sleep
+def home_menu():
     print('''
 ░█████╗░██╗░░░░░██████╗░██╗░░██╗░█████╗░░██████╗░███████╗███╗░░██╗░██████╗
 ██╔══██╗██║░░░░░██╔══██╗██║░░██║██╔══██╗██╔════╝░██╔════╝████╗░██║██╔════╝
@@ -14,13 +16,28 @@ def menu():
           #       *   |     3 - Sair             |     #   -  *    %    -
     @     -    *   %  |--------------------------|   %     -    @      #    
 ''')
+def final_menu():
+    print('''
+░██████╗░░█████╗░███╗░░░███╗███████╗  
+██╔════╝░██╔══██╗████╗░████║██╔════╝  
+██║░░██╗░███████║██╔████╔██║█████╗░░  
+██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░  
+╚██████╔╝██║░░██║██║░╚═╝░██║███████╗  
+░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝  
+
+░█████╗░██╗░░░██╗███████╗██████╗░
+██╔══██╗██║░░░██║██╔════╝██╔══██╗
+██║░░██║╚██╗░██╔╝█████╗░░██████╔╝
+██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗
+╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
+░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝''')
 
 colors = ['A','B','C','D','E','F','G','H','I','J']
 
 def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
-    colors = colors[0:size] # lista com as cores
+    colors = colors[0:9] # lista com as cores
     linha = [0] * size
     matriz = [linha] * size
 
@@ -53,25 +70,20 @@ def print_matriz(matriz): # printa a matriz recebida
         print(matriz[i])
         
 def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # realiza a permutação dos itens da matriz
-    '''if (linha1 == linha2):
-    if abs(coluna1 - coluna2 == 1):
-        return True
-    elif (coluna1 == coluna2):
-    if abs(linha1 - linha2) == 1)):
-        return True
-    else:
-        return False'''
-    while not ((current_m == finale_m) and (abs(current_n - finale_n) == 1)) or ((current_n == finale_n) and (abs(current_m - finale_m) == 1)):
+    while not (((current_m == finale_m) and (abs(current_n - finale_n) == 1)) or ((current_n == finale_n) and (abs(current_m - finale_m) == 1))):
         print('Permutação inválida! Tente novamente!')
         current_m = check_permutation(input("Digite a linha atual: "),size)
         current_n = check_permutation(input("Digite a coluna atual: "), size)
         finale_m = check_permutation(input("Digite a linha final: "),size)
-        finale_n = check_permutation(input("Digite a coluna final: "),size)
-        
+        finale_n = check_permutation(input("Digite a coluna final: "),size)       
     x = matriz[current_m-1][current_n-1]
     y = matriz[finale_m-1][finale_n-1]
     matriz[current_m-1][current_n-1] = y
     matriz[finale_m-1][finale_n-1] = x
+    sleep(0.5)
+    system("cls")
+    print_matriz(matriz)
+    #print(f'Pontos: {point}')
     # parte responsável por fazer as trocas das gemas
     return matriz
 
@@ -160,7 +172,7 @@ def generate_in_line(matriz, size): # preenche todo o tabuleiro após a gravidad
     for i in range(size-1, -1, -1):
         for j in range(size-1, -1, -1):
             if matriz[i][j] == ' ':
-                y = choice(colors[0:size])
+                y = choice(colors[0:9])
                 matriz[i][j] = y
     
     return matriz
@@ -245,7 +257,8 @@ def tips(matriz, size): # as dicas de um jeito meio brutal-force testando todos 
     return False
 
 def validation_of_opition(option):
+
     while option not in 'MmDd' or len(option) == 0:
         print('Digite apenas M ou D!!')
-        option = input('Aperte M para mover ou D para dicas [M/D]: ')
+        option = str(input('Aperte M para mover ou D para dicas [M/D]: ').upper())
     return option
