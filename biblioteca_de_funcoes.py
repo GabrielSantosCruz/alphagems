@@ -2,20 +2,21 @@ from os import system
 from time import sleep
 def home_menu():
     print('''
-░█████╗░██╗░░░░░██████╗░██╗░░██╗░█████╗░░██████╗░███████╗███╗░░██╗░██████╗
-██╔══██╗██║░░░░░██╔══██╗██║░░██║██╔══██╗██╔════╝░██╔════╝████╗░██║██╔════╝
-███████║██║░░░░░██████╔╝███████║███████║██║░░██╗░█████╗░░██╔██╗██║╚█████╗░
-██╔══██║██║░░░░░██╔═══╝░██╔══██║██╔══██║██║░░╚██╗██╔══╝░░██║╚████║░╚═══██╗
-██║░░██║███████╗██║░░░░░██║░░██║██║░░██║╚██████╔╝███████╗██║░╚███║██████╔╝
-╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░
-==========================================================================
-  #     ==     *    -      @       __    #       **     -_     %     $   %      
-      *     -    *    |--------------------------|  #  -    *   --      @ 
-   *        #         |     1 - Jogar            |      *       -    #   
-      @       *       |     2 - Tutorial         | @     -   #      ==   *
-          #       *   |     3 - Sair             |     #   -  *    %    -
-    @     -    *   %  |--------------------------|   %     -    @      #    
-''')
+
+░█████╗░██╗░░░░░██████╗░██╗░░██╗░█████╗░░██████╗░███████╗███╗░░░███╗░██████╗
+██╔══██╗██║░░░░░██╔══██╗██║░░██║██╔══██╗██╔════╝░██╔════╝████╗░████║██╔════╝
+███████║██║░░░░░██████╔╝███████║███████║██║░░██╗░█████╗░░██╔████╔██║╚█████╗░
+██╔══██║██║░░░░░██╔═══╝░██╔══██║██╔══██║██║░░╚██╗██╔══╝░░██║╚██╔╝██║░╚═══██╗
+██║░░██║███████╗██║░░░░░██║░░██║██║░░██║╚██████╔╝███████╗██║░╚═╝░██║██████╔╝
+╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░░░░╚═╝╚═════╝░
+============================================================================
+    #     ==     *    -      @       __    #       **     -_     %     $   %      
+        *     -    *    |--------------------------|  #  -    *   --      @ 
+     *        #         |     1 - Jogar            |      *       -    #   
+        @       *       |     2 - Tutorial         | @     -   #      ==   *
+            #       *   |     3 - Sair             |     #   -  *    %    -
+      @     -    *   %  |--------------------------|   %     -    @      #''')
+
 def final_menu():
     print('''
 ░██████╗░░█████╗░███╗░░░███╗███████╗  
@@ -37,7 +38,7 @@ colors = ['A','B','C','D','E','F','G','H','I','J']
 def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
-    colors = colors[0:9] # lista com as cores
+    colors = colors[0:size] # lista com as cores
     linha = [0] * size
     matriz = [linha] * size
 
@@ -66,7 +67,11 @@ def check_permutation(number, size):
     return int(number) # retorna o número já convertido 
 
 def print_matriz(matriz): # printa a matriz recebida
+    for i in range(len(matriz)):
+        print(f'    {i+1}', end = '') # printar os números das colunas
+    print('') # para o end não juntar com o for de baixo
     for i in range(len(matriz)): # printa a matriz linha por linha
+        print(f'{i+1}', end=' ') # printa o número das linhas
         print(matriz[i])
         
 def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # realiza a permutação dos itens da matriz
@@ -76,11 +81,23 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
         current_n = check_permutation(input("Digite a coluna atual: "), size)
         finale_m = check_permutation(input("Digite a linha final: "),size)
         finale_n = check_permutation(input("Digite a coluna final: "),size)       
+    
     x = matriz[current_m-1][current_n-1]
     y = matriz[finale_m-1][finale_n-1]
+
     matriz[current_m-1][current_n-1] = y
     matriz[finale_m-1][finale_n-1] = x
-    sleep(0.5)
+    if not check_points(matriz, size):
+        sleep(1)
+        system("cls")
+        print_matriz(matriz)
+        matriz[current_m-1][current_n-1] = x
+        matriz[finale_m-1][finale_n-1] = y
+        sleep(0.5)
+        system("cls")
+        print_matriz(matriz)
+        print('Não houve pontuação! Tente novamente')
+    sleep(1)
     system("cls")
     print_matriz(matriz)
     #print(f'Pontos: {point}')
@@ -109,15 +126,13 @@ def break_gens(matriz, size): # quebra as gemas
     for i in range(size): # vertical
             quant = 1
             for j in range(size):
-
                 if j > 0: # para corrigir o erro de Index saindo do range
-                    if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]) or (matriz[j-1][i] == matriz[j][i].lower()):
+                    if (matriz[j][i] == matriz[j-1][i]) or (matriz[j][i].lower() == matriz[j-1][i]) or (matriz[j][i] == matriz[j-1][i].lower()):
                         quant +=1
                         if quant >= 3 and (j == (size-1)): # para quando houver de quebrar gemas nas bordas
                             for k in range(1, quant+1):                      
                                 matriz[(j+1)-k][i] = matriz[(j+1)-k][i].lower()
                             quant = 1
-                   
                     else:
                         if quant >= 3:
                             for k in range(1, quant+1):                         
@@ -172,7 +187,7 @@ def generate_in_line(matriz, size): # preenche todo o tabuleiro após a gravidad
     for i in range(size-1, -1, -1):
         for j in range(size-1, -1, -1):
             if matriz[i][j] == ' ':
-                y = choice(colors[0:9])
+                y = choice(colors[0:size])
                 matriz[i][j] = y
     
     return matriz
@@ -257,8 +272,13 @@ def tips(matriz, size): # as dicas de um jeito meio brutal-force testando todos 
     return False
 
 def validation_of_opition(option):
-
     while option not in 'MmDd' or len(option) == 0:
         print('Digite apenas M ou D!!')
         option = str(input('Aperte M para mover ou D para dicas [M/D]: ').upper())
     return option
+
+def validation_of_menu(option):
+    while not option.isdigit() or (int(option) < 1) or (int(option) > 3):
+        print('Opção inválida!')
+        option = input('Digite a opção desejada: ')
+    return int(option)
