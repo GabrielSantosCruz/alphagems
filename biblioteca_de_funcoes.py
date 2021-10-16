@@ -84,24 +84,23 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
     
     x = matriz[current_m-1][current_n-1]
     y = matriz[finale_m-1][finale_n-1]
-
-    matriz[current_m-1][current_n-1] = y
-    matriz[finale_m-1][finale_n-1] = x
-    if not check_points(matriz, size):
-        sleep(1)
-        system("cls")
-        print_matriz(matriz)
-        matriz[current_m-1][current_n-1] = x
-        matriz[finale_m-1][finale_n-1] = y
-        sleep(0.5)
-        system("cls")
-        print_matriz(matriz)
-        print('Não houve pontuação! Tente novamente')
     sleep(1)
     system("cls")
     print_matriz(matriz)
-    #print(f'Pontos: {point}')
-    # parte responsável por fazer as trocas das gemas
+    matriz[current_m-1][current_n-1] = y
+    matriz[finale_m-1][finale_n-1] = x
+    sleep(1)
+    system("cls")
+    print_matriz(matriz)
+
+    if not check_points(matriz, size):
+        matriz[current_m-1][current_n-1] = x
+        matriz[finale_m-1][finale_n-1] = y
+        sleep(1)
+        system("cls")
+        print_matriz(matriz)
+        print('Não houve pontuação! Tente novamente')
+
     return matriz
 
 def break_gens(matriz, size): # quebra as gemas
