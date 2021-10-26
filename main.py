@@ -11,12 +11,14 @@ O código e sua evolução pode ser encontrado em: https://github.com/GabrielSan
 ******************************************************************************************/'''
 from os import system
 from time import sleep
-from biblioteca_de_funcoes import *
+from biblioteca_de_funcoes import * 
 
-home_menu()
-option_menu = validation_of_menu(input('Digite a opção desejada: '))
+option_menu = 1
 
 while option_menu != 3:
+
+    home_menu()
+    option_menu = validation_of_menu(input('Digite a opção desejada: '))
 
     if option_menu == 1:
         point = 0
@@ -78,7 +80,7 @@ while option_menu != 3:
 
         final_menu()
         print(f'Sua pontuação total foi: {point}')
-        play_again = input('Deseja jogar novamente? [S/N]: ').upper()
+        play_again = validation_playagain(input('Deseja jogar novamente? [S/N]: ').upper())
         if play_again == 'S':
             option_menu = 1
             # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)

@@ -1,5 +1,6 @@
 from os import system
 from time import sleep
+from colorama import init, Fore, Back, Style
 def home_menu():
     print('''
 
@@ -33,12 +34,12 @@ def final_menu():
 ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║
 ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝''')
 
-colors = ['A','B','C','D','E','F','G','H','I','J']
+colors = ['A','B','C','D','E','F','G','H','I','J'] # lista com as 10 "cores"
 
 def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
     from random import choice
     colors = ['A','B','C','D','E','F','G','H','I','J']
-    colors = colors[0:size] # lista com as cores
+    colors = colors[0:size] # lista com as cores que serão usadas
     linha = [0] * size
     matriz = [linha] * size
 
@@ -51,17 +52,12 @@ def build_matriz(size): #gera uma matriz já preenchida com letras aleatórias
 
     return matriz
 
-def check_number_matriz(number): # verificar se o número digitado é inteiro
+def check_number_matriz(number): # valida se o número digitado está entre 3 e 10
     while not number.isdigit() or len(number) == 0 or int(number) > 10 or int(number) < 3: # verifica se o tamanho está de acordo
         number = input("Erro! Digite um valor válido: ")
     return int(number) # retorna o número já convertido
 
-def check_int(number):
-    while not number.isdigit() or len(number) == 0 or int(number) < 0:
-        number = input("Erro! Digite um valor válido: ")
-    return int(number) # retorna o número já convertido
-
-def check_permutation(number, size):
+def check_permutation(number, size): # checa se o numero digitado para a permutação não ultrapassa o tamanho da matriz
     while not number.isdigit() or len(number) == 0 or (int(number) < 0) or (int(number) > size):
         number = input("Erro! Digite um valor válido: ")
     return int(number) # retorna o número já convertido 
@@ -69,12 +65,13 @@ def check_permutation(number, size):
 def print_matriz(matriz): # printa a matriz recebida
     for i in range(len(matriz)):
         print(f'    {i+1}', end = '') # printar os números das colunas
-    print('') # para o end não juntar com o for de baixo
+    print('') # para o end não juntar com o loop "for" de baixo
     for i in range(len(matriz)): # printa a matriz linha por linha
         print(f'{i+1}', end=' ') # printa o número das linhas
         print(matriz[i])
         
 def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # realiza a permutação dos itens da matriz
+    # para verificar se a permutação é válida
     while not (((current_m == finale_m) and (abs(current_n - finale_n) == 1)) or ((current_n == finale_n) and (abs(current_m - finale_m) == 1))):
         print('Permutação inválida! Tente novamente!')
         current_m = check_permutation(input("Digite a linha atual: "),size)
@@ -93,9 +90,10 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
     system("cls")
     print_matriz(matriz)
 
-    if not check_points(matriz, size):
+    if not check_points(matriz, size): # verifica se a permutação realizada marca ponto
         matriz[current_m-1][current_n-1] = x
         matriz[finale_m-1][finale_n-1] = y
+        # as 2 linhas acima retornam a posição antes da permutação
         sleep(1)
         system("cls")
         print_matriz(matriz)
@@ -239,7 +237,7 @@ def check_points(matriz, size): # retorna True para quando houver encontro de 3 
                         quant = 1
     return False
 
-def tips(matriz, size): # as dicas de um jeito meio brutal-force testando todos movimentos possíveis
+def tips(matriz, size): # Função de dicas baseada na que o aluno Gabriel Ribeiro mostrou em uma das sessões
     for i in range(size): # para testar todas permutações na horizontal
         for j in range(size-1):
             a = matriz[i][j]
@@ -270,14 +268,19 @@ def tips(matriz, size): # as dicas de um jeito meio brutal-force testando todos 
 
     return False
 
-def validation_of_opition(option):
+def validation_of_opition(option): # valida se a opção digitada é M de mover ou D de dicas
     while option not in 'MmDd' or len(option) == 0:
         print('Digite apenas M ou D!!')
         option = str(input('Aperte M para mover ou D para dicas [M/D]: ').upper())
     return option
 
-def validation_of_menu(option):
+def validation_of_menu(option): # valida as opções do menu principal
     while not option.isdigit() or (int(option) < 1) or (int(option) > 3):
         print('Opção inválida!')
         option = input('Digite a opção desejada: ')
     return int(option)
+
+def validation_playagain(option): # valida as opções de sim ou não
+    while option not in 'SsNn' or len(option) == 0:
+        print('Opção inválida!')
+        option = input('Deseja jogar novamente? [S/N]: ').upper()
