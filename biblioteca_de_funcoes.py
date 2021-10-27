@@ -1,6 +1,6 @@
 from os import system
 from time import sleep
-from colorama import init, Fore, Back, Style
+
 def home_menu():
     print('''
 
@@ -137,6 +137,7 @@ def break_gens(matriz, size): # quebra as gemas
                             quant = 1
                         else:
                             quant = 1
+
     return matriz
 
 
@@ -147,7 +148,6 @@ def punctuation(matriz, size, point): # calcula a pontuação do jogo
                 if matriz[i][j].islower():
                     point += 1
 
-    #print(f'Pontos: {point}')
     return point
 
 def smash(matriz, size): # quebra as gemas transformadas em letras minúsculas após a união de 3 ou mais
@@ -235,6 +235,7 @@ def check_points(matriz, size): # retorna True para quando houver encontro de 3 
                         return True
                     else:
                         quant = 1
+    
     return False
 
 def tips(matriz, size): # Função de dicas baseada na que o aluno Gabriel Ribeiro mostrou em uma das sessões
@@ -284,3 +285,4 @@ def validation_playagain(option): # valida as opções de sim ou não
     while option not in 'SsNn' or len(option) == 0:
         print('Opção inválida!')
         option = input('Deseja jogar novamente? [S/N]: ').upper()
+    return option
