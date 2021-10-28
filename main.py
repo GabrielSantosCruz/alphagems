@@ -15,6 +15,10 @@ from biblioteca_de_funcoes import *
 
 option_menu = 1
 
+
+#### todas funções cls são para limpar a tela criando assim um efeito de animação no jogo
+#### todas as funções time são para gerar um pequeno delay na tela durante a animação
+
 while option_menu != 3:
 
     home_menu()
@@ -85,6 +89,7 @@ while option_menu != 3:
             option_menu = 1
             # me falaram um nome que em alguns momentos me deu vontade de colocar no jogo (Candy crise)
 
+    # explicação de como se jogar
     elif option_menu == 2:
         sleep(0.5)
         system('cls')

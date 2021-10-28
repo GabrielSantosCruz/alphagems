@@ -101,7 +101,7 @@ def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # reali
 
     return matriz
 
-def break_gens(matriz, size): # quebra as gemas
+def break_gens(matriz, size): # quebra as gemas transformando-as em letras minusculas
     for i in range(size): # horizontal
         quant = 1
         for j in range(size):
@@ -140,8 +140,6 @@ def break_gens(matriz, size): # quebra as gemas
 
     return matriz
 
-
-
 def punctuation(matriz, size, point): # calcula a pontuação do jogo
     for i in range(size):            
             for j in range(size):
@@ -158,6 +156,7 @@ def smash(matriz, size): # quebra as gemas transformadas em letras minúsculas a
     
     return matriz
 
+# função semelhate ao que o aluno Gabriel Ribeiro apresentou em uma sessão tutorial
 def gravity(matriz, size): # faz as gemas cairem
     quant = 0
 
