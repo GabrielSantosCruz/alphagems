@@ -63,13 +63,16 @@ def check_permutation(number, size): # checa se o numero digitado para a permuta
     return int(number) # retorna o número já convertido 
 
 def print_matriz(matriz): # printa a matriz recebida
+    print('      ', end='')
     for i in range(len(matriz)):
-        print(f'    {i+1}', end = '') # printar os números das colunas
+        print(f'{i+1}', end = '  ') # printar os números das colunas
     print('') # para o end não juntar com o loop "for" de baixo
+    print(f'    ┌{"───"*len(matriz)}┐')
     for i in range(len(matriz)): # printa a matriz linha por linha
-        print(f'{i+1}', end=' ') # printa o número das linhas
-        print(matriz[i])
-        
+        print(f' {i+1}', end=' ') # printa o número das linhas
+        print(f' │ {"  ".join(matriz[i])} │')
+    print(f'    └{"───"*len(matriz)}┘')
+    
 def permutation(current_m, current_n, finale_m, finale_n, matriz, size): # realiza a permutação dos itens da matriz
     # para verificar se a permutação é válida
     while not (((current_m == finale_m) and (abs(current_n - finale_n) == 1)) or ((current_n == finale_n) and (abs(current_m - finale_m) == 1))):

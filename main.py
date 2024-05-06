@@ -19,6 +19,7 @@ option_menu = 1
 #### todas funções cls são para limpar a tela criando assim um efeito de animação no jogo
 #### todas as funções time são para gerar um pequeno delay na tela durante a animação
 
+
 while option_menu != 3:
 
     home_menu()
@@ -54,11 +55,11 @@ while option_menu != 3:
                 sleep(0.5)
                 system("cls")
                 print_matriz(matriz)
-                print(f'Pontos: {point}')
+                print(f'\nPontos: {point}')
                 sleep(0.5)
                 system("cls")
                 print_matriz(matriz)
-                print(f'Pontos: {point}')
+                print(f'\nPontos: {point}')
 
             a = tips(matriz, size)
 
